@@ -1,0 +1,49 @@
+// @import "../../node_modules/bootstrap/scss/bootstrap";
+// @import "./scss/custom.scss";
+
+/* make the customizations */
+:root{
+    --principal:  #D2691E;
+    --lightcolor: #FFFFF3;
+    --secondcolor: #4C463D;
+    --darkcolor: #1F1F1F;
+}
+
+$theme-colors: (
+    "primary": #D2691E,
+    "secondary": #4C463D,
+    "light":#FFFFF3,
+    "dark":#1F1F1F,
+    "body-color": #FFFFF3
+);
+
+
+
+
+$enable-rounded:false;
+$enable-shadows:true;
+
+// Buttons style
+$btn-font-family: 'Poppins';
+$btn-border-radius: 0px;
+$btn-font-size: 16px;
+$btn-color : white;
+// $btn-hover-bg-tint-amount: 50%;
+
+// Cards Style
+$card-border-radius: 0px;
+$card-border-color:rgba(76, 70, 61, 0.4);
+$box-shadow:  4.68611px 4.68611px 6.69444px rgba(0, 0, 0, 0.25);  
+
+// Navs Style
+$nav-pills-border-radius: 0px;
+$nav-pills-link-active-color: var(--lightcolor);
+$nav-pills-link-active-bg: var(--principal);
+$nav-link-color: var(--darkcolor);
+$nav-link-hover-color: var(--principal);
+
+
+/* import bootstrap to set changes */
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,500,600|Montserrat:300,500");

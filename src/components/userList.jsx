@@ -37,7 +37,7 @@ const UserList = () => {
       email: selectedUser.email_user,
       name: selectedUser.user_name,
       lastname: selectedUser.user_lastname,
-      rol: selectedUser.user_lastname,
+      rol: selectedUser.user_rol,
     });
     setModal(true);
   };

@@ -26,7 +26,7 @@ export default function LandingPage({ handleLogout }) {
 
                             <div className='card-body mx-auto align-items-center row'>
                                 <div>
-                                    <h1 className="card-title mb-4" id='title'>BIENVENIDO A TODO RÁQUIRA</h1>
+                                    <h1 className="card-title mb-4" id='title'>BIENVENIDO A ComprArte</h1>
                                     <h5 className="card-text mb-5" id='subtitle'>¡Aquí podras comprobar el costo de tu compra!</h5>
 
                                     <a className="btn btn-primary" id='btn-cotizar' style={{ color: 'white' }} onClick={handleButtonClick} >COTIZAR →</a>

@@ -206,10 +206,10 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                                     disabled={!clientExists}
                                                 >
                                                     <option value={''}>Seleccione un valor</option>
-                                                    <option value={'CC'}>Cédula de ciudadania</option>
-                                                    <option value={'TI'}>Tarjeta de identidad</option>
-                                                    <option value={'CE'}>Cédula de extranjería</option>
-                                                    <option value={'TE'}>Tarjeta de extranjería</option>
+                                                    <option value={'CC'}>Cédula de Ciudadania</option>
+                                                    <option value={'TI'}>Tarjeta de Identidad</option>
+                                                    <option value={'CE'}>Cédula de Extranjería</option>
+                                                    <option value={'TE'}>Tarjeta de Extranjería</option>
                                                     <option value={'NT'}>NIT</option>
                                                     <option value={'PS'}>Pasaporte</option>
                                                 </Input>
@@ -407,10 +407,10 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                                         onBlur={handleBlur}
                                                         value={values.tipo_documento}
                                                         >
-                                                        <option value={'CC'}>Cédula de ciudadania</option>
-                                                        <option value={'TI'}>Tarjeta de identidad</option>
-                                                        <option value={'CE'}>Cédula de extranjería</option>
-                                                        <option value={'TE'}>Tarjeta de extranjería</option>
+                                                        <option value={'CC'}>Cédula de Ciudadania</option>
+                                                        <option value={'TI'}>Tarjeta de Identidad</option>
+                                                        <option value={'CE'}>Cédula de Extranjería</option>
+                                                        <option value={'TE'}>Tarjeta de Extranjería</option>
                                                         <option value={'NT'}>NIT</option>
                                                         <option value={'PS'}>Pasaporte</option>
                                                     </Input>

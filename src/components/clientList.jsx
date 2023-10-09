@@ -34,14 +34,14 @@ const ClientList = () => {
 
   const toggle = (selectedCliente) => {
     setSelectedValues({
-      id_cliente: selectedCliente.id_cliente,
-      nombres_cliente: selectedCliente.nombres_cliente,
-      apellidos_cliente: selectedCliente.apellidos_cliente,
-      tipo_documento: selectedCliente.tipo_documento,
-      numero_documento: selectedCliente.numero_documento,
-      telefono: selectedCliente.telefono,
-      email: selectedCliente.email,
-      estado_cliente: selectedCliente.estado_cliente,
+      id_cliente: selectedCliente.id_customer,
+      nombres_cliente: selectedCliente.name_customer,
+      apellidos_cliente: selectedCliente.lastname_customer,
+      tipo_documento: selectedCliente.document_type,
+      numero_documento: selectedCliente.number_document,
+      telefono: selectedCliente.number_phone,
+      email: selectedCliente.email_customer,
+      estado_cliente: selectedCliente.status_customer,
     });
     setModal(true);
   };
@@ -207,25 +207,25 @@ const ClientList = () => {
                     return (
                       <tr>
                         <td id="table-cell" key={index}>
-                          {list_item.nombres_cliente}
+                          {list_item.name_customer}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.apellidos_cliente}
+                          {list_item.lastname_customer}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.tipo_documento}
+                          {list_item.document_type}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.numero_documento}
+                          {list_item.number_document}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.telefono}
+                          {list_item.number_phone}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.email}
+                          {list_item.email_customer}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.estado_cliente}
+                          {list_item.status_customer}
                         </td>
                         <td
                           id="table-cell"
@@ -331,13 +331,13 @@ const ClientList = () => {
             }}
             onSubmit={async (values, { resetForm }) => {
               await axios.put(`http://localhost:8000/clients/update/${values.id_cliente}`, {
-                  nombres_cliente: values.nombres_cliente,
-                  apellidos_cliente: values.apellidos_cliente,
-                  tipo_documento: values.tipo_documento,
-                  numero_documento: values.numero_documento,
-                  telefono: values.telefono,
-                  email: values.email,
-                  estado_cliente: values.estado_cliente,
+                name_customer: values.nombres_cliente,
+                lastname_customer: values.apellidos_cliente,
+                document_type: values.tipo_documento,
+                number_document: values.numero_documento,
+                number_phone: values.telefono,
+                email_customer: values.email,
+                status_customer: values.estado_cliente,
                 }).then(function (res) {
                   if (res.status === 200) {
                     swal({
@@ -393,7 +393,7 @@ const ClientList = () => {
                           type="name"
                           name="nombres_cliente"
                           placeholder="nombres"
-                          invalid={errors.nombres_cliente && touched.nombres_cliente}
+                          invalid={errors.nombres_cliente && touched.name_customer}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.nombres_cliente}
@@ -410,7 +410,7 @@ const ClientList = () => {
                           type="lastName"
                           name="apellidos_cliente"
                           placeholder="Apellido"
-                          invalid={errors.apellidos_cliente && touched.apellidos_cliente}
+                          invalid={errors.apellidos_cliente && touched.lastname_customer}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.apellidos_cliente}
@@ -429,16 +429,16 @@ const ClientList = () => {
                           id="text"
                           type="select"
                           name="tipo_documento"
-                          invalid={errors.tipo_documento && touched.tipo_documento}
+                          invalid={errors.tipo_documento && touched.document_type}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.tipo_documento}
                         >
                           <option value={""}>Seleccione un valor</option>
-                          <option value={"CC"}>Cédula de ciudadania</option>
-                          <option value={"TI"}>Tarjeta de identidad</option>
-                          <option value={"CE"}>Cédula de extranjería</option>
-                          <option value={"TE"}>Tarjeta de extranjería</option>
+                          <option value={"CC"}>Cédula de Ciudadania</option>
+                          <option value={"TI"}>Tarjeta de Identidad</option>
+                          <option value={"CE"}>Cédula de Extranjería</option>
+                          <option value={"TE"}>Tarjeta de Extranjería</option>
                           <option value={"NT"}>NIT</option>
                           <option value={"PS"}>Pasaporte</option>
                         </Input>
@@ -455,7 +455,7 @@ const ClientList = () => {
                           name="numero_documento"
                           placeholder=""
                           invalid={
-                            errors.numero_documento && touched.numero_documento
+                            errors.numero_documento && touched.number_document
                           }
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -476,7 +476,7 @@ const ClientList = () => {
                           type="email"
                           name="email"
                           placeholder=""
-                          invalid={errors.email && touched.email}
+                          invalid={errors.email && touched.email_customer}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.email}
@@ -495,7 +495,7 @@ const ClientList = () => {
                           type="select"
                           name="estado_cliente"
                           invalid={
-                            errors.estado_cliente && touched.estado_cliente
+                            errors.estado_cliente && touched.status_customer
                           }
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -519,7 +519,7 @@ const ClientList = () => {
                           type="number"
                           name="telefono"
                           placeholder=""
-                          invalid={errors.telefono && touched.telefono}
+                          invalid={errors.telefono && touched.number_phone}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.telefono}

@@ -8,7 +8,7 @@ export default function ProductInformationComponent({ product, setState, state }
     const [quantity, setQuantity] = useState(1);
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addNewProduct({ 'product': product, 'quantity': quantity, 'subtotal': (product.precio_unitario * quantity) }))
+        dispatch(addNewProduct({ 'product': product, 'quantity': quantity, 'subtotal': (product.unit_price * quantity) }))
         setState(false)
     }
 
@@ -34,14 +34,14 @@ export default function ProductInformationComponent({ product, setState, state }
         <div className="card mb-4" style={{ 'max-width': '950px', 'backgroundColor': '#FFFFF3', 'border': 'none', 'min-width': '900px' }}>
             <div className="row g-0 mx-4 mt-4">
                 <div className="col-md-5">
-                    <img src={product.imagen_producto} className="img-fluid " />
+                    <img src={product.product_picture} className="img-fluid " />
                 </div>
                 <div className="col-md-7">
                     <div className="card-body ">
-                        <h5 className="card-title mb-3" id='title'>{product.nombre_producto}</h5>
-                        <h6 className="card-subtitle mb-4 " id='price'>$ {product.precio_unitario.toLocaleString('es-CO')} Iva Incluido.</h6>
-                        <div dangerouslySetInnerHTML={{ __html: product.descripcion }} className="card-text" id='text'/>
-                        {product.estado === 'N' && 
+                        <h5 className="card-title mb-3" id='title'>{product.name_product}</h5>
+                        <h6 className="card-subtitle mb-4 " id='price'>$ {product.unit_price.toLocaleString('es-CO')} Iva Incluido.</h6>
+                        <div dangerouslySetInnerHTML={{ __html: product.description_product }} className="card-text" id='text'/>
+                        {product.status_product === 'N' && 
                         <p className="card-text py-3"><small className="text-danger " id='text'>No Disponible</small></p>
                         }
                         <form onSubmit={handleSubmit}>
@@ -51,11 +51,11 @@ export default function ProductInformationComponent({ product, setState, state }
 
                                 </div>
                                 <div className='col-md-3 input-container'>
-                                    <input min="1" max={product.cantidad} type="number" className="form-control" defaultValue={1} onChange={(e) => setQuantity(parseInt(e.target.value))} />
+                                    <input min="1" max={product.quantity} type="number" className="form-control" defaultValue={1} onChange={(e) => setQuantity(parseInt(e.target.value))} />
                                 
                                 </div>
                             </div>
-                            {product.estado !== 'N' && 
+                            {product.status_product !== 'N' && 
 
                             <div className='row mt-4 justify-content-end'>
                                 <div className='col-md-5'>

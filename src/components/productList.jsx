@@ -64,13 +64,13 @@ function ProductList() {
     console.log("SELECCIONADO", selectedProduct);
     setSelectedValues({
       id_product: selectedProduct.id_product,
-      categoria: selectedProduct.categoria,
-      referencia: selectedProduct.referencia_producto,
-      nombre_Producto: selectedProduct.nombre_producto,
-      descripcion: selectedProduct.descripcion,
-      cantidad: selectedProduct.cantidad,
-      precio_unitario: selectedProduct.precio_unitario,
-      estado_producto: selectedProduct.estado,
+      categoria: selectedProduct.id_category,
+      referencia: selectedProduct.product_reference,
+      nombre_Producto: selectedProduct.name_product,
+      descripcion: selectedProduct.description_product,
+      cantidad: selectedProduct.quantity,
+      precio_unitario: selectedProduct.unit_price,
+      estado_producto: selectedProduct.status_product,
       imagen: "",
     });
     setModal(true);
@@ -136,9 +136,9 @@ function ProductList() {
     }
   };
 
-  const deleteProduct = async (id) => {
+  const deleteProduct = async (id_product) => {
     await axios
-      .put(`http://localhost:8000/delete-product/${id}`)
+      .put(`http://localhost:8000/delete-product/${id_product}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -302,24 +302,24 @@ function ProductList() {
                       <tr key={index}>
                         <td >
                           <img
-                            src={list_item.imagen_producto}
+                            src={list_item.product_picture}
                             alt="Imagen del producto"
                             style={{ width: "40px", maxWidth: "50px" }}
                           />
                         </td>
                         <td id="table-cell">
-                          {list_item.nombre_producto}
+                          {list_item.name_product}
                         </td>
                         <td id="table-cell" >
-                          {list_item.referencia_producto}
+                          {list_item.product_reference}
                         </td>
                         <td id="table-cell">
-                          {list_item.categoriaAsociada.name_category}
+                          {list_item.categoryAssociated.name_category}
                         </td>
                         <td id="table-cell" >
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: list_item.descripcion,
+                              __html: list_item.description_product,
                             }}
                             className="card-text"
                             id="text"
@@ -327,13 +327,13 @@ function ProductList() {
                           />
                         </td>
                         <td id="table-cell" >
-                          {list_item.cantidad}
+                          {list_item.quantity}
                         </td>
                         <td id="table-cell" >
-                          $ {list_item.precio_unitario.toLocaleString("es-CO")}
+                          $ {list_item.unit_price.toLocaleString("es-CO")}
                         </td>
                         <td id="table-cell" >
-                          {list_item.estado === "D"
+                          {list_item.status_product === "D"
                             ? "Disponible"
                             : "No disponible"}
                         </td>
@@ -441,13 +441,13 @@ function ProductList() {
               await axios
                 .put(`http://localhost:8000/update/${values.id_product}`, {
                   id_category: values.categoria,
-                  nombre_producto: values.nombre_Producto,
-                  descripcion: values.descripcion,
-                  cantidad: values.cantidad,
-                  referencia_producto: values.referencia,
-                  precio_unitario: values.precio_unitario,
-                  imagen_producto: productData.imagen,
-                  estado: values.estado_producto,
+                  name_product: values.nombre_Producto,
+                  description_product: values.descripcion,
+                  quantity: values.cantidad,
+                  product_reference: values.referencia,
+                  unit_price: values.precio_unitario,
+                  product_picture: productData.imagen,
+                  status_product: values.estado_producto,
                 }).then(function (res) {
                   if (res.status === 200) {
                     swal({
@@ -513,7 +513,7 @@ function ProductList() {
                           id="text"
                           type="select"
                           name="categoria"
-                          invalid={errors.categoria && touched.categoria}
+                          invalid={errors.categoria && touched.id_category}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.categoria}
@@ -540,7 +540,7 @@ function ProductList() {
                           type="text"
                           name="referencia"
                           placeholder="MD122"
-                          invalid={errors.referencia && touched.referencia}
+                          invalid={errors.referencia && touched.product_reference}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.referencia}
@@ -560,7 +560,7 @@ function ProductList() {
                           name="nombre_Producto"
                           placeholder="nombre"
                           invalid={
-                            errors.nombre_Producto && touched.nombre_Producto
+                            errors.nombre_Producto && touched.name_product
                           }
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -579,7 +579,7 @@ function ProductList() {
                           type="select"
                           name="estado_producto"
                           invalid={
-                            errors.estado_producto && touched.estado_producto
+                            errors.estado_producto && touched.status_product
                           }
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -621,7 +621,7 @@ function ProductList() {
                           type="text"
                           name="cantidad"
                           placeholder="cantidad"
-                          invalid={errors.cantidad && touched.cantidad}
+                          invalid={errors.cantidad && touched.quantity}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.cantidad}
@@ -642,7 +642,7 @@ function ProductList() {
                           name="precio_unitario"
                           placeholder="precio"
                           invalid={
-                            errors.precio_unitario && touched.precio_unitario
+                            errors.precio_unitario && touched.unit_price
                           }
                           onChange={handleChange}
                           onBlur={handleBlur}

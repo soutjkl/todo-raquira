@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
-import { Formik } from 'formik';
-import { Container, Button, Form, FormGroup, Label, Input, Card, CardBody, CardHeader, FormFeedback, Col, Row } from "reactstrap";
-import Menu from './Menu';
-import Landing from '../view_user/pages/landing-page.jsx';
-import { useEffect } from 'react';
+import React, { useState } from "react";
+import { Formik } from "formik";
+import {
+  Container,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Card,
+  CardBody,
+  CardHeader,
+  FormFeedback,
+  Col,
+  Row,
+} from "reactstrap";
+import Menu from "./Menu";
+import Landing from "../view_user/pages/landing-page.jsx";
+import { useEffect } from "react";
 import swal from "sweetalert";
-import axios from 'axios';
+import axios from "axios";
 
 const Login = () => {
   const [miLogin, setLogin] = useState(false);
   const [generalUser, setGeneralUser] = useState(false);
   const [emailLists, setEmail] = useState([]);
-  const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState(false);
 
   const logIn = async (values) => {
     try {
@@ -19,12 +32,12 @@ const Login = () => {
       const { token, user_rol } = response.data;
       localStorage.setItem("authToken", token);
       localStorage.setItem("userRole", user_rol);
-      if (user_rol === "admin") {
+      if (user_rol === "Administrador") {
         setAuthenticated(true);
-        setLogin(true)
-      }else if(user_rol === "user"){
+        setLogin(true);
+      } else if (user_rol === "user") {
         setAuthenticated(true);
-        setGeneralUser(true)
+        setGeneralUser(true);
       }
     } catch (error) {
       swal({
@@ -34,21 +47,21 @@ const Login = () => {
         timer: 2000,
       });
     }
-  }
+  };
 
   const checkAuth = () => {
     const token = localStorage.getItem("authToken");
     if (token) {
       setAuthenticated(true);
-      const user_rol = localStorage.getItem("userRole")
-    if(user_rol === 'admin'){
-      setLogin(true)
-    }else if(user_rol === 'user'){
-      setGeneralUser(true)
+      const user_rol = localStorage.getItem("userRole");
+      if (user_rol === "admin") {
+        setLogin(true);
+      } else if (user_rol === "user") {
+        setGeneralUser(true);
       }
     }
   };
-  
+
   useEffect(() => {
     checkAuth();
   }, []);
@@ -56,7 +69,9 @@ const Login = () => {
   const validar = (values) => {
     const errors = {};
     if (!values.email_user) errors.email_user = "Requerido";
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email_user))
+    else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email_user)
+    )
       errors.email_user = "Email Invalido";
     if (!values.user_password) errors.user_password = "Requerido";
     else if (`${values.user_password}`.length < 5)
@@ -69,7 +84,6 @@ const Login = () => {
     localStorage.removeItem("userRole");
     setLogin(false);
     setGeneralUser(false);
-
   };
 
   if (miLogin) {
@@ -81,19 +95,18 @@ const Login = () => {
   } else if (generalUser) {
     return (
       <>
-        <Landing handleLogout={handleLogout}/>
+        <Landing handleLogout={handleLogout} />
       </>
     );
   } else {
     return (
       <>
-        <Container id='form' className="p-5" display="flex">
+        <Container id="form" className="p-5" display="flex">
           <Card className="rounded p-2">
             <Formik
               initialValues={{
                 email_user: "",
-                user_passwordd
-        : "",
+                user_password: "",
               }}
               onSubmit={logIn}
               validate={validar}
@@ -110,24 +123,39 @@ const Login = () => {
                   /* y otras más */
                 } = props;
                 return (
-                  <Form id='form_login' onSubmit={handleSubmit} className="mx-5" style={{ textAlign: 'center' }}>
+                  <Form
+                    id="form_login"
+                    onSubmit={handleSubmit}
+                    className="mx-5"
+                    style={{ textAlign: "center" }}
+                  >
                     <Row>
                       <Col md={6}>
-                        <div className='col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 ' style={{
-                          backgroundImage: `url("https://todoraquira.com/wp-content/uploads/slider2/artesanos2.jpeg")`,
-                          width: "550px", height: "500px", backgroundSize:"cover"
-                        }}>
-                        </div>
+                        <div
+                          className="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 "
+                          style={{
+                            backgroundImage: `url("https://todoraquira.com/wp-content/uploads/slider2/artesanos2.jpeg")`,
+                            width: "550px",
+                            height: "500px",
+                            backgroundSize: "cover",
+                          }}
+                        ></div>
                       </Col>
                       <Col md={6}>
-                        <h1 id='title' className="my-4" style={{ textAlign: 'center' }}>BIENVENIDO</h1>
-                        <FormGroup >
-                          <Label id='subtitle' for="email" className="mb-3">
+                        <h1
+                          id="title"
+                          className="my-4"
+                          style={{ textAlign: "center" }}
+                        >
+                          BIENVENIDO
+                        </h1>
+                        <FormGroup>
+                          <Label id="subtitle" for="email_user" className="mb-3">
                             Email
                           </Label>
                           <Input
                             type="email"
-                            name="email"
+                            name="email_user"
                             placeholder="contoso@gmail.com"
                             invalid={errors.email_user && touched.email_user}
                             onChange={handleChange}
@@ -138,26 +166,29 @@ const Login = () => {
                           <FormFeedback>{errors.email_user}</FormFeedback>
                         </FormGroup>
                         <FormGroup>
-                          <Label id='subtitle' for="user_passwordd
-                  " >Contraseña</Label>
+                          <Label id="subtitle" for="user_password">
+                            Contraseña
+                          </Label>
                           <Input
-                            type="user_passwordd
-                    "
-                            name="user_passwordd
-                    "
+                            type="password"
+                            name="user_password"
                             placeholder="Contraseña"
-                            invalid={errors.user_passwordd
-                       && touched.user_passwordd
-                    }
+                            invalid={
+                              errors.user_password && touched.user_password
+                            }
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.user_passwordd
-                    }
+                            value={values.user_password}
                           />
-                          <FormFeedback>{errors.user_passwordd
-                  }</FormFeedback>
+                          <FormFeedback>{errors.user_password}</FormFeedback>
                         </FormGroup>
-                        <Button type='submit' className='btn btn-primary' style={{ color: 'white' }} color="#D2691E" disabled={isSubmitting}>
+                        <Button
+                          type="submit"
+                          className="btn btn-primary"
+                          style={{ color: "white" }}
+                          color="#D2691E"
+                          disabled={isSubmitting}
+                        >
                           {isSubmitting ? `Loading` : `Iniciar sesión`}
                         </Button>
                       </Col>

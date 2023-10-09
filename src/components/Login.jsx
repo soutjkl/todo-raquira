@@ -35,7 +35,7 @@ const Login = () => {
       if (rol === "Administrador") {
         setAuthenticated(true);
         setLogin(true);
-      } else if (rol === "user") {
+      } else if (rol === "Usuario General") {
         setAuthenticated(true);
         setGeneralUser(true);
       }
@@ -54,9 +54,9 @@ const Login = () => {
     if (token) {
       setAuthenticated(true);
       const user_rol = localStorage.getItem("userRole");
-      if (user_rol === "admin") {
+      if (user_rol === "Administrador") {
         setLogin(true);
-      } else if (user_rol === "user") {
+      } else if (user_rol === "Usuario General") {
         setGeneralUser(true);
       }
     }

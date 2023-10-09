@@ -58,12 +58,13 @@ const RegisterUser = () => {
             }}
             onSubmit={async (values, { resetForm }) => {
               await axios.post(URI, {
-                  email: values.email,
-                  name: values.name,
-                  lastname: values.lastName,
-                  password: values.password,
-                  rol: values.rol,
-                }).then(function (res) {
+                email_user: values.email,
+                user_name: values.name,
+                user_lastname: values.lastName,
+                user_password: values.password,
+                user_rol: values.rol,
+                status_user: "A" // Siempre activo por defecto, según tu ejemplo
+              }).then(function (res) {
                   console.log("---------------", res.status);
                   if (res.status === 200) {
                     swal({
@@ -202,8 +203,8 @@ const RegisterUser = () => {
                           value={values.rol}
                         >
                           <option value={""}>Selecione un valor</option>
-                          <option value={"user"}>Usuario general</option>
-                          <option value={"admin"}>Administrador</option>
+                          <option value={"Usuario General"}>Usuario General</option>
+                          <option value={"Administrador"}>Administrador</option>
                         </Input>
                         <FormFeedback>{errors.rol}</FormFeedback>
                       </FormGroup>

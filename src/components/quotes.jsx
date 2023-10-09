@@ -214,8 +214,8 @@ const Quotes = () => {
 													value={values.rol}
 												>
 													<option value={''}>Selecione un valor</option>
-													<option value={'User'}>User</option>
-													<option value={'Admin'}>Admin</option>
+													<option value={'Usuario General'}>Usuario General</option>
+													<option value={'Administrador'}>Administrador</option>
 												</Input>
 												<FormFeedback>{errors.rol}</FormFeedback>
 											</FormGroup>

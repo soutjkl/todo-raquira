@@ -34,10 +34,10 @@ const UserList = () => {
   const toggle = (selectedUser) => {
     console.log("SELECCIONADO", selectedUser);
     setSelectedValues({
-      email: selectedUser.email,
-      name: selectedUser.name,
-      lastname: selectedUser.lastname,
-      rol: selectedUser.rol,
+      email: selectedUser.email_user,
+      name: selectedUser.user_name,
+      lastname: selectedUser.user_lastname,
+      rol: selectedUser.user_lastname,
     });
     setModal(true);
   };
@@ -63,9 +63,9 @@ const UserList = () => {
     setMaxPage(Math.ceil(listUsers.length / 10));
   }, [listUsers, dispatch]);
 
-  const deleteUser = async (email) => {
+  const deleteUser = async (email_user) => {
     await axios
-      .put(`http://localhost:8000/delete/${email}`)
+      .delete(`http://localhost:8000/delete/${email_user}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -184,18 +184,18 @@ const UserList = () => {
                     return (
                       <tr>
                         <td id="table-cell" key={index}>
-                          {list_item.email}
+                          {list_item.email_user}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.name}
+                          {list_item.user_name}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.lastname}
+                          {list_item.user_lastname}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.rol === "admin"
+                          {list_item.user_rol === "Administrador"
                             ? "Administrador"
-                            : "Usuario general"}
+                            : "Usuario General"}
                         </td>
                         <td
                           id="table-cell"
@@ -218,7 +218,7 @@ const UserList = () => {
                           </button>
                           <button
                             className="btn btn-danger"
-                            onClick={() => deleteUser(list_item.email)}
+                            onClick={() => deleteUser(list_item.email_user)}
                             style={{
                               color: "#D2691E",
                               border: "none",
@@ -298,11 +298,11 @@ const UserList = () => {
             onSubmit={async (values, { resetForm }) => {
               await axios
                 .put(`http://localhost:8000/user/${values.email}`, {
-                  email: values.email,
-                  name: values.name,
-                  lastname: values.lastname,
-                  password: values.password,
-                  rol: values.rol,
+                  email_user: values.email,
+                  user_name: values.name,
+                  user_lastname: values.lastname,
+                  user_password: values.password,
+                  user_rol: values.rol,
                 })
                 .then(function (res) {
                   if (res.status === 200) {
@@ -363,7 +363,7 @@ const UserList = () => {
                           type="email"
                           name="email"
                           placeholder=""
-                          invalid={errors.email && touched.email}
+                          invalid={errors.email && touched.email_user}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.email}
@@ -379,7 +379,7 @@ const UserList = () => {
                           type="password"
                           name="password"
                           placeholder="Contraseña"
-                          invalid={errors.password && touched.password}
+                          invalid={errors.password && touched.user_password}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.password}
@@ -396,7 +396,7 @@ const UserList = () => {
                           type="name"
                           name="name"
                           placeholder="nombre"
-                          invalid={errors.name && touched.name}
+                          invalid={errors.name && touched.user_name}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.name}
@@ -411,7 +411,7 @@ const UserList = () => {
                           type="lastname"
                           name="lastname"
                           placeholder="Apellido"
-                          invalid={errors.lastname && touched.lastname}
+                          invalid={errors.lastname && touched.user_lastname}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.lastname}
@@ -428,15 +428,15 @@ const UserList = () => {
                           id="text"
                           type="select"
                           name="rol"
-                          invalid={errors.rol && touched.rol}
+                          invalid={errors.rol && touched.user_rol}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.rol}
                         >
                           <option value={""}>Selecione un valor</option>
-                          <option value={"user"}>User</option>
+                          <option value={"Usuario General"}>Usuario General</option>
    
-                          <option value={"admin"}>Admin</option>
+                          <option value={"Administrador"}>Administrador</option>
                         </Input>
                         <FormFeedback>{errors.rol}</FormFeedback>
                       </FormGroup>

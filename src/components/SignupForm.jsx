@@ -37,10 +37,10 @@ const SignupForm = () => {
       if (values.email.length === 0) {
         alert("Complete los datos faltantes!!");
       } else {
-        if (values.email === emailList.email && values.password === desencrypt(emailList.password) && emailList.rol === "admin") {
+        if (values.email === emailList.email && values.password === desencrypt(emailList.password) && emailList.rol === "Administrador") {
           setLogin("true");
           document.getElementById("form").style.display = "none";
-        } else if (values.email === emailList.email && values.password === desencrypt(emailList.password) && emailList.rol === "user") {
+        } else if (values.email === emailList.email && values.password === desencrypt(emailList.password) && emailList.rol === "Usuario General") {
           setgeneralUser("true");
           document.getElementById("form").style.display = "none";
         }

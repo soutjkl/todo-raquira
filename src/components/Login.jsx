@@ -29,13 +29,13 @@ const Login = () => {
   const logIn = async (values) => {
     try {
       const response = await axios.post("http://localhost:8000/login", values);
-      const { token, user_rol } = response.data;
+      const { token, rol } = response.data;
       localStorage.setItem("authToken", token);
-      localStorage.setItem("userRole", user_rol);
-      if (user_rol === "Administrador") {
+      localStorage.setItem("userRole", rol);
+      if (rol === "Administrador") {
         setAuthenticated(true);
         setLogin(true);
-      } else if (user_rol === "user") {
+      } else if (rol === "user") {
         setAuthenticated(true);
         setGeneralUser(true);
       }

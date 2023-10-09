@@ -16,13 +16,13 @@ const Login = () => {
   const logIn = async (values) => {
     try {
       const response = await axios.post("http://localhost:8000/login", values);
-      const { token, rol } = response.data;
+      const { token, user_rol } = response.data;
       localStorage.setItem("authToken", token);
-      localStorage.setItem("userRole", rol);
-      if (rol === "admin") {
+      localStorage.setItem("userRole", user_rol);
+      if (user_rol === "admin") {
         setAuthenticated(true);
         setLogin(true)
-      }else if(rol === "user"){
+      }else if(user_rol === "user"){
         setAuthenticated(true);
         setGeneralUser(true)
       }
@@ -40,10 +40,10 @@ const Login = () => {
     const token = localStorage.getItem("authToken");
     if (token) {
       setAuthenticated(true);
-      const role = localStorage.getItem("userRole")
-    if(role === 'admin'){
+      const user_rol = localStorage.getItem("userRole")
+    if(user_rol === 'admin'){
       setLogin(true)
-    }else if(role === 'user'){
+    }else if(user_rol === 'user'){
       setGeneralUser(true)
       }
     }
@@ -55,12 +55,12 @@ const Login = () => {
 
   const validar = (values) => {
     const errors = {};
-    if (!values.email) errors.email = "Requerido";
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email))
-      errors.email = "Email Invalido";
-    if (!values.password) errors.password = "Requerido";
-    else if (`${values.password}`.length < 5)
-      errors.password = "Debe tener 8 caracteres o menos";
+    if (!values.email_user) errors.email_user = "Requerido";
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email_user))
+      errors.email_user = "Email Invalido";
+    if (!values.user_password) errors.user_password = "Requerido";
+    else if (`${values.user_password}`.length < 5)
+      errors.user_password = "Debe tener 8 caracteres o menos";
     return errors;
   };
 
@@ -91,8 +91,9 @@ const Login = () => {
           <Card className="rounded p-2">
             <Formik
               initialValues={{
-                email: "",
-                password: "",
+                email_user: "",
+                user_passwordd
+        : "",
               }}
               onSubmit={logIn}
               validate={validar}
@@ -128,26 +129,33 @@ const Login = () => {
                             type="email"
                             name="email"
                             placeholder="contoso@gmail.com"
-                            invalid={errors.email && touched.email}
+                            invalid={errors.email_user && touched.email_user}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.email}
+                            value={values.email_user}
                             style={{ textAlign: "justify" }}
                           />
-                          <FormFeedback>{errors.email}</FormFeedback>
+                          <FormFeedback>{errors.email_user}</FormFeedback>
                         </FormGroup>
                         <FormGroup>
-                          <Label id='subtitle' for="password" >Contraseña</Label>
+                          <Label id='subtitle' for="user_passwordd
+                  " >Contraseña</Label>
                           <Input
-                            type="password"
-                            name="password"
+                            type="user_passwordd
+                    "
+                            name="user_passwordd
+                    "
                             placeholder="Contraseña"
-                            invalid={errors.password && touched.password}
+                            invalid={errors.user_passwordd
+                       && touched.user_passwordd
+                    }
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.password}
+                            value={values.user_passwordd
+                    }
                           />
-                          <FormFeedback>{errors.password}</FormFeedback>
+                          <FormFeedback>{errors.user_passwordd
+                  }</FormFeedback>
                         </FormGroup>
                         <Button type='submit' className='btn btn-primary' style={{ color: 'white' }} color="#D2691E" disabled={isSubmitting}>
                           {isSubmitting ? `Loading` : `Iniciar sesión`}

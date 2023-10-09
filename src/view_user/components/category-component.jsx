@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import ModalWindow from './modal-window';
 import ProductInformationComponent from './product-information-component';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../../features/cotizations/productsSlice';
+import { setProducts } from '../../features/cotizations/productSlice';
 
 
 export default function CategoryComponent({ category, goBack }) {

@@ -14,7 +14,7 @@ import { setProducts } from '../../features/cotizations/productSlice';
 export default function CategoryComponent({ category, goBack }) {
 
 
-    const URI = `http://localhost:8000/product/category/${category.id_categoria}`
+    const URI = `http://localhost:8000/product/category/${category.id_category}`
     const [page, setPage] = useState(1)
     const [topPage, setTopPage] = useState(1)
     const dispatch = useDispatch()
@@ -52,7 +52,7 @@ export default function CategoryComponent({ category, goBack }) {
         <>
             <div className='container dflex'>
                 <div className='row '>
-                    <h1 className="m-5" id="title"><FontAwesomeIcon icon={faArrowLeft} className='mx-4' style={{color:'rgba(210, 105, 30, 1)', cursor:'pointer'}} onClick={() => goBack()} />{category.nombre_categoria.toUpperCase()}</h1>
+                    <h1 className="m-5" id="title"><FontAwesomeIcon icon={faArrowLeft} className='mx-4' style={{color:'rgba(210, 105, 30, 1)', cursor:'pointer'}} onClick={() => goBack()} />{category.name_category.toUpperCase()}</h1>
                 </div>
                 {products.length > 0 ?
                     <div className="row m-4 dflex" style={{ paddingLeft: '3%' }}>

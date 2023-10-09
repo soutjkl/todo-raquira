@@ -35,8 +35,8 @@ const CategoryList = () => {
     setIsNewCategory(isNew);
     setSelectedCategoryId(categoryId);
     if (categoryId) {
-      const selectedCategory = listCategory.find(category => category.id_categoria === categoryId);
-      setSelectedCategoryName(selectedCategory ? selectedCategory.nombre_categoria : null);
+      const selectedCategory = listCategory.find(category => category.id_category === categoryId);
+      setSelectedCategoryName(selectedCategory ? selectedCategory.name_category : null);
     } else {
       setSelectedCategoryName(null);
     }
@@ -45,7 +45,7 @@ const CategoryList = () => {
 
   const deleteCategory = async (id) => {
     await axios
-      .put(`http://localhost:8000/delete-categories/${id}`)
+      .delete(`http://localhost:8000/delete-categories/${id}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -69,9 +69,9 @@ const CategoryList = () => {
 
   const validate = (values) => {
     const errors = {};
-    if (!values.nombre_categoria) {
+    if (!values.name_category) {
       errors.name = "Requerido";
-    } else if (values.nombre_categoria.length > 20) {
+    } else if (values.name_category.length > 20) {
       errors.name = "Debe tener 10 caracteres o menos";
     }
     return errors;
@@ -126,12 +126,12 @@ const CategoryList = () => {
               ) {
                 return (
                   <tr>
-                    <td id="table-cell" key={index}>{listCate.id_categoria}</td>
-                    <td id="table-cell" key={index}>{listCate.nombre_categoria}</td>
+                    <td id="table-cell" key={index}>{listCate.id_category}</td>
+                    <td id="table-cell" key={index}>{listCate.name_category}</td>
                     <td id="table-cell" key={index} style={{ marginTop: 2, textAlign: "center" }}>
                       <button
                         className="btn btn-primary mr-2"
-                        onClick={() => toggle(false, listCate.id_categoria)}
+                        onClick={() => toggle(false, listCate.id_category)}
                         style={{
                           color: "#D2691E",
                           border: "none",
@@ -145,7 +145,7 @@ const CategoryList = () => {
                       </button>
                       <button
                         className="btn btn-danger"
-                        onClick={() => deleteCategory(listCate.id_categoria)}
+                        onClick={() => deleteCategory(listCate.id_category)}
                         style={{
                           color: "#D2691E",
                           border: "none",
@@ -215,13 +215,13 @@ const CategoryList = () => {
         <Card>
           <Formik
             initialValues={{
-              id_categoria: selectedCategoryId,
-              nombre_categoria: "",
+              id_category: selectedCategoryId,
+              name_category: "",
             }}
             onSubmit={async (values, { resetForm }) => {
               if (isNewCategory) {
                 await axios.post("http://localhost:8000/categories/new-categories", {
-                    nombre_categoria: values.nombre_categoria }).then(function (res) {
+                  name_category: values.name_category }).then(function (res) {
                     if (res.status === 200) {
                       swal({
                         title: "Éxito",
@@ -243,9 +243,9 @@ const CategoryList = () => {
               } else {
                 await axios
                   .put(
-                    `http://localhost:8000/categories/update/${values.id_categoria}`,
+                    `http://localhost:8000/categories/update/${values.id_category}`,
                     {
-                      nombre_categoria: values.nombre_categoria,
+                      name_category: values.name_category,
                     }
                   ).then(function (res) {
                     if (res.status === 200) {
@@ -288,21 +288,21 @@ const CategoryList = () => {
                 >
                   <Row>
                     <FormGroup>
-                      <Label id="subtitle" for="nombre_categoria">
+                      <Label id="subtitle" for="name_category">
                         Nombre categoria
                       </Label>
                       <Input
                         type="name"
-                        name="nombre_categoria"
+                        name="name_category"
                         placeholder="categoria"
                         invalid={
-                          errors.nombre_categoria && touched.nombre_categoria
+                          errors.name_category && touched.name_category
                         }
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.nombre_categoria || selectedCategoryName || ''}
+                        value={values.name_category || selectedCategoryName || ''}
                       />
-                      <FormFeedback>{errors.nombre_categoria}</FormFeedback>
+                      <FormFeedback>{errors.name_category}</FormFeedback>
                     </FormGroup>
                   </Row>
                   <Button

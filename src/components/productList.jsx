@@ -314,7 +314,7 @@ function ProductList() {
                           {list_item.referencia_producto}
                         </td>
                         <td id="table-cell">
-                          {list_item.categoriaAsociada.nombre_categoria}
+                          {list_item.categoriaAsociada.name_category}
                         </td>
                         <td id="table-cell" >
                           <div
@@ -440,7 +440,7 @@ function ProductList() {
             onSubmit={async (values) => {
               await axios
                 .put(`http://localhost:8000/update/${values.id_product}`, {
-                  id_categoria: values.categoria,
+                  id_category: values.categoria,
                   nombre_producto: values.nombre_Producto,
                   descripcion: values.descripcion,
                   cantidad: values.cantidad,
@@ -521,10 +521,10 @@ function ProductList() {
                           <option value={"s"}> Seleccione una categoria</option>
                           {listCategory.map((category) => (
                             <option
-                              key={category.id_categoria}
-                              value={category.id_categoria}
+                              key={category.id_category}
+                              value={category.id_category}
                             >
-                              {category.nombre_categoria}
+                              {category.name_category}
                             </option>
                           ))}
                         </Input>

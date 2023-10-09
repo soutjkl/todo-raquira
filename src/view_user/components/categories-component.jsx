@@ -42,7 +42,7 @@ export default function CategoriesComponent() {
               return (
                 <div className="card m-3 justify-content-center align-items-center" style={{ width: '15rem', height: '80px', cursor: 'pointer' }} onClick={()=>handleOnClick(category)}>
                   <div className="card-body p-0 text-center row justify-content-center align-items-center " style={{ width: '100%', height: '100%' }}>
-                    <h5 className="card-title m-0 col-auto" id='subtitle' style={{ color: '#d2691e' }}>{category.nombre_categoria.toUpperCase()}</h5>
+                    <h5 className="card-title m-0 col-auto" id='subtitle' style={{ color: '#d2691e' }}>{category.name_category.toUpperCase()}</h5>
                   </div>
                 </div>
               )

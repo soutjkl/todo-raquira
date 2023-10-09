@@ -148,7 +148,7 @@ const RegisterProductAux = () => {
             onSubmit={async (values, { resetForm }) => {
               await axios
                 .post(URI, {
-                  id_categoria: values.categoria,
+                  id_category: values.categoria,
                   nombre_producto: values.nombre_Producto,
                   descripcion: values.descripcion,
                   cantidad: values.cantidad,
@@ -225,10 +225,10 @@ const RegisterProductAux = () => {
                           <option value={"s"}> Seleccione una categoria</option>
                           {listCategory.map((category) => (
                             <option
-                              key={category.id_categoria}
-                              value={category.id_categoria}
+                              key={category.id_category}
+                              value={category.id_category}
                             >
-                              {category.nombre_categoria}{" "}
+                              {category.name_category}{" "}
                             </option>
                           ))}
                         </Input>

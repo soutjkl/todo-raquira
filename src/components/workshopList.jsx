@@ -228,7 +228,14 @@ const WorkshopList = () => {
                           {list_item.name_workshop}
                         </td>
                         <td id="table-cell" key={index}>
-                          {list_item.description_workshop}
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: list_item.description_workshop,
+                            }}
+                            className="card-text"
+                            id="text"
+                            style={{ maxWidth: "500px", wordBreak: "break-all"}}
+                          />
                         </td>
                         <td id="table-cell" key={index}>
                           {list_item.price_workshop}

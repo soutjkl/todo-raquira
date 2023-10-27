@@ -1,7 +1,13 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import PersonSpinner from "./person-spinner-component";
+import { useDispatch } from "react-redux";
 
 export default function WorkshopInfoComponent({ fecha }) {
+  const [listworkshop, setlistworkshop] = useState([]);
+  const URI = "http://localhost:8000/AllWorkshops";
+  const dispatch = useDispatch();
+
   const containerStyle = {
     border: "1px solid #4C463D66",
     padding: "10px",
@@ -28,24 +34,22 @@ export default function WorkshopInfoComponent({ fecha }) {
     margin: "10px 0",
   };
 
+  const getlistworkshop = async () => {
+    try {
+      await axios.get(URI).then(function (res) {
+        dispatch(setlistworkshop(res.data));
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+  useEffect(() => {
+    getlistworkshop();
+  }, []);
+
   return (
     <div className="col-md-4" style={containerStyle}>
-      <div>
-        <label>Desde</label>
-        <p style={priceStyle}>${"precio"}</p>
-        <label>Por persona</label>
-      </div>
-      <hr style={lineStyle} />
-      <div style={{ flex: 1 }}>
-        <strong>Fecha</strong>
-        <p>{fecha} 18/09/2023</p>
-        <hr style={lineStyle} />
-        <strong># Personas</strong>
-        <PersonSpinner />
-      </div>
-      <button className="btn btn-primary" style={buttonStyle}>
-        Reservar
-      </button>
-    </div>
+    
+  </div>
   );
 }

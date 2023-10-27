@@ -27,7 +27,7 @@ export default function WorkshopComponent({ fecha }) {
   const buttonStyle = {
     backgroundColor: "#yourButtonColor",
     color: "white",
-    width: "100%",
+    width: "40%",
   };
 
   const lineStyle = {

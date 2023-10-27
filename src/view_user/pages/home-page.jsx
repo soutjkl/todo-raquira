@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Link, useMatch, resolvePath, useResolvedP
 import CategoriesComponent from "../components/categories-component";
 import CotizationComponent from "../components/cotization-component";
 import SearchComponent from "../components/search-component";
+import WorkshopComponent from "../components/workshop-component";
+
 import LandingPage from "./landing-page";
 
 function CustomLink({ to, children, ...props }) {
@@ -32,6 +34,7 @@ export default function HomePage({landing}) {
                         <CustomLink to='/search'>BUSCAR →</CustomLink>
                         <CustomLink to='/categories'>CATEGORÍAS →</CustomLink>
                         <CustomLink to='/cotization'>COTIZACIÓN →</CustomLink>
+                        <CustomLink to='/workshop'>TALLERES →</CustomLink>
 
 
                     </ul>
@@ -43,6 +46,7 @@ export default function HomePage({landing}) {
                         <Route path='/search' element={<SearchComponent />}></Route>
                         <Route path='/categories' element={<CategoriesComponent />}></Route>
                         <Route path='/cotization' element={<CotizationComponent />}></Route>
+                        <Route path='/workshop' element={<WorkshopComponent />}></Route>
                     </Routes>
 
                 </main>

@@ -1,14 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faPenToSquare,
-  faArrowRight,
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
 import { Field, Formik } from "formik";
 import {
+  Container,
   Button,
   Form,
   FormGroup,
@@ -16,85 +10,16 @@ import {
   Input,
   Card,
   FormFeedback,
-  Col,
-  Row,
-  Modal,
 } from "reactstrap";
 import swal from "sweetalert";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setImage } from "../features/product/productCreateSlice";
 import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-const WorkshopList = () => {
-  const [listworkshop, setlistworkshop] = useState([]);
-  const [modal, setModal] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(0);
-  const URI = "http://localhost:8000/AllWorkshops";
+const Workshop = () => {
+  const URI = "http://localhost:8000/createWorkshop";
   const dispatch = useDispatch();
-  const [selectedValues, setSelectedValues] = useState({});
-
-  const toggle = (setlistworkshop) => {
-    console.log("SELECCIONADO", setlistworkshop);
-    setSelectedValues({
-      id_workshop: setlistworkshop.id_workshop,
-      name_workshop: setlistworkshop.name_workshop,
-      price_workshop: setlistworkshop.price_workshop,
-      capacity_workshop: setlistworkshop.capacity_workshop,
-      email_user: setlistworkshop.email_user,
-      status_workshop: setlistworkshop.status_workshop,
-      description_workshop: setlistworkshop.description_workshop,
-      date_workshop: setlistworkshop.date_workshop,
-    });
-    setModal(true);
-  };
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  useEffect(() => {
-    getlistworkshop();
-  }, []);
-
-  const getlistworkshop = async () => {
-    try {
-      await axios.get(URI).then(function (res) {
-        dispatch(setlistworkshop(res.data));
-      });
-    } catch (error) {
-      console.log("Error", error);
-    }
-  };
-
-  useEffect(() => {
-    setMaxPage(Math.ceil(listworkshop.length / 10));
-  }, [listworkshop, dispatch]);
-
-  const deleteWorkshop = async (id_workshop) => {
-    await axios
-      .delete(`http://localhost:8000/deleteWorkshop/${id_workshop}`)
-      .then(function (res) {
-        if (res.status === 200) {
-          swal({
-            title: "Éxito",
-            text: "Usuario eliminado",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          getlistworkshop();
-        }
-      })
-      .catch(function (err) {
-        if (err.response.status >= 400) {
-          swal({
-            title: "Fallo",
-            text: "Usuario no eliminado",
-            icon: "error",
-            timer: 2000,
-          });
-        }
-      });
-  };
 
   const validate = (values) => {
     const errors = {};
@@ -137,254 +62,48 @@ const WorkshopList = () => {
 
   return (
     <>
-      <div
-        className="bg text-center"
-        style={{
-          marginTop: 0,
-          padding: 30,
-          textAlign: "center",
-          marginBottom: 0,
-        }}
-      >
-        <div className="table-responsive">
-          <>
-            <table
-              className="table table-hover table-striped"
-              style={{ marginTop: 2, textAlign: "center" }}
-            >
-              <thead
-                className="text-center "
-                style={{ backgroundColor: "#e07528" }}
-              >
-                <tr>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Id
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Nombre
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Descripción
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Precio
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Capacidad
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Fecha
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Estado
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Email contacto
-                  </th>
-                  <th
-                    id="subtitle"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Acciones
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {listworkshop.map((list_item, index) => {
-                  if (
-                    index <= currentPage * 10 &&
-                    index >= currentPage * 10 - 10
-                  ) {
-                    return (
-                      <tr>
-                        <td id="table-cell" key={index}>
-                          {list_item.id_workshop}
-                        </td>
-                        <td id="table-cell" key={index}>
-                          {list_item.name_workshop}
-                        </td>
-                        <td id="table-cell" key={index}>
-                          {list_item.description_workshop}
-                        </td>
-                        <td id="table-cell" key={index}>
-                          {list_item.price_workshop}
-                        </td>
-                        <td id="table-cell" key={index}>
-                          {list_item.capacity_workshop}
-                        </td>
-                        <td id="table-cell" key={index}>
-                          {list_item.date_workshop}
-                        </td>
-                        <td id="table-cell">
-                          {list_item.status_workshop === "D"
-                            ? "Disponible"
-                            : "No disponible"}
-                        </td>
-                        <td id="table-cell" key={index}>
-                          {list_item.email_user}
-                        </td>
-                        <td
-                          id="table-cell"
-                          key={index}
-                          style={{ marginTop: 2, textAlign: "center" }}
-                        >
-                          <button
-                            className="btn btn-primary mr-2"
-                            onClick={() => toggle(list_item)}
-                            style={{
-                              color: "#D2691E",
-                              border: "none",
-                              borderRadius: "10px",
-                              height: "30px",
-                              fontSize: "18px",
-                              background: "none",
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faPenToSquare} />
-                          </button>
-                          <button
-                            className="btn btn-danger"
-                            onClick={() =>
-                              deleteWorkshop(list_item.id_workshop)
-                            }
-                            style={{
-                              color: "#D2691E",
-                              border: "none",
-
-                              borderRadius: "10px",
-                              height: "30px",
-                              fontSize: "18px",
-                              background: "none",
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faTrash} />
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  }
-                })}
-              </tbody>
-            </table>
-            <div
-              className="pagination position-center botttom-0 float-center"
-              style={{ justifyContent: "center" }}
-            >
-              {currentPage > 1 && (
-                <button
-                  className="btn btn-primary m-1 "
-                  style={{ color: "white" }}
-                  id="subtitle"
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                >
-                  <FontAwesomeIcon
-                    icon={faArrowLeft}
-                    disabled={currentPage > 1 ? true : false}
-                  />
-                </button>
-              )}
-              <div
-                id="text"
-                style={{ alignContent: "center", padding: "10px" }}
-              >
-                {currentPage} de {maxPage}
-              </div>
-              {currentPage < maxPage && (
-                <button
-                  className="btn btn-primary m-1"
-                  style={{ color: "white" }}
-                  id="subtitle"
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                >
-                  <FontAwesomeIcon icon={faArrowRight} />
-                </button>
-              )}
-            </div>
-          </>
-        </div>
-      </div>
-
-      <Modal
-        isOpen={modal}
-        toggle={closeModal}
-        style={{
-          maxWidth: "900px",
-          width: "100%",
-          maxHeight: "700px",
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <Card className="rounded">
+      <Container id="form" className="p-5">
+        <Card className="rounded p-2">
           <Formik
             initialValues={{
-              id_workshop: selectedValues.id_workshop || "",
-              name_workshop: selectedValues.name_workshop || "",
-              price_workshop: selectedValues.price_workshop || "",
-              capacity_workshop: selectedValues.capacity_workshop || "",
-              email_user: selectedValues.email_user || "",
-              status_workshop: selectedValues.status_workshop || "",
-              description_workshop: selectedValues.description_workshop || "",
-              date_workshop: selectedValues.date_workshop || "",
+              name_workshop: "",
+              price_workshop: "",
+              descripcion: "",
+              capacity_workshop: "",
+              email_user: "",
+              status_workshop: "",
+              description_workshop: "",
+              date_workshop: "",
             }}
             onSubmit={async (values, { resetForm }) => {
               await axios
-                .put(
-                  `http://localhost:8000/updateWorkshop/${values.id_workshop}`,
-                  {
-                    name_workshop: values.name_workshop,
-                    price_workshop: values.price_workshop,
-                    capacity_workshop: values.capacity_workshop,
-                    email_user: values.email_user,
-                    status_workshop: values.status_workshop,
-                    description_workshop: values.description_workshop,
-                    date_workshop: values.date_workshop,
-                  }
-                )
+                .post(URI, {
+                  name_workshop: values.name_workshop,
+                  price_workshop: values.price_workshop,
+                  capacity_workshop: values.capacity_workshop,
+                  email_user: values.email_user,
+                  status_workshop: values.status_workshop,
+                  description_workshop: values.description_workshop,
+                  date_workshop: values.date_workshop,
+                })
                 .then(function (res) {
                   if (res.status === 200) {
                     swal({
-                      title: "Exito",
-                      text: "Taller actualizo ",
+                      title: "Éxito",
+                      text: "Taller Creado ",
                       icon: "success",
-                      showConfirmButton: false,
                       timer: 2000,
                     });
-                    getlistworkshop();
                     resetForm();
+                    dispatch(setImage(""));
                   }
                 })
                 .catch(function (err) {
+                  console.log("ERRORR---", err);
                   if (err.response.status === 400) {
                     swal({
-                      title: "Fallo",
-                      text: "Taller No actualizado ",
+                      title: "Error interno",
+                      text: "No se pudo crear el taller intenta de nuevo ",
                       icon: "error",
                       timer: 2000,
                     });
@@ -410,7 +129,7 @@ const WorkshopList = () => {
                     id="title"
                     style={{ textAlign: "center", padding: 10 }}
                   >
-                    Editar Taller
+                    Nuevo Taller
                   </h2>
                   <div className="row">
                     <div className="col-6">
@@ -599,7 +318,7 @@ const WorkshopList = () => {
                       color="#D2691E"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? `Loading` : `Actualizar`}
+                      {isSubmitting ? `Loading` : `Guardar`}
                     </Button>
                   </div>
                 </Form>
@@ -607,9 +326,9 @@ const WorkshopList = () => {
             }}
           </Formik>
         </Card>
-      </Modal>
+      </Container>
     </>
   );
 };
 
-export default WorkshopList;
+export default Workshop;

@@ -9,6 +9,7 @@ import CategoryList from "./categoryList";
 import ClientList from "./clientList";
 import Quotes from "./quotes";
 import Login from "./Login";
+import Workshop from "./workshop";
 import WorkshopList from "./workshopList";
 
 const Menu = ({ handleLogout }) => {
@@ -151,6 +152,19 @@ const Menu = ({ handleLogout }) => {
                       onMouseEnter={(e) => e.target.style.backgroundColor = "#ba5106"}
                       onMouseLeave={(e) => e.target.style.backgroundColor = "#D2691E"}
                     >
+                      Registro Talleres
+                    </Link>
+                  </li >
+                  <li className="nav-item" style={{ backgroundColor: "#D2691E" }}>
+                    <Link
+                      id="subtitle"
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/AllWorkshops"
+                      style={{ color: "#FFFFF3", textDecoration: "none", transition: "background-color 0.3s ease-in-out"}}
+                      onMouseEnter={(e) => e.target.style.backgroundColor = "#ba5106"}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = "#D2691E"}
+                    >
                       Talleres
                     </Link>
                   </li >
@@ -179,8 +193,8 @@ const Menu = ({ handleLogout }) => {
           <Route path="/categorias" element={<CategoryList />}></Route>
           <Route path="/cotizaciones" element={<Quotes />}></Route>
           <Route path="/clientes" element={<ClientList />}></Route>
-          <Route path="/workshops" element={<WorkshopList />}></Route>
-
+          <Route path="/workshops" element={<Workshop />}></Route>
+          <Route path="/AllWorkshops" element={<WorkshopList />}></Route>
         </Routes>
       </BrowserRouter>
     </>

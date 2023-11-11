@@ -20,7 +20,7 @@ const SignupForm = () => {
   // Haciendo petición al backend
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:8000/userAll");
+      const response = await fetch("https://comprarte-backend-production.up.railway.app/userAll");
       const data = await response.json();
       setEmail(data);
     }

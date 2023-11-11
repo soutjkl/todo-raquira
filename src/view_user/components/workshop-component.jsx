@@ -6,7 +6,7 @@ import WorkshopInfoComponent from "./info-workshop-component";
 
 export default function WorkshopComponent({ fecha }) {
   const [listworkshop, setlistworkshop] = useState([]);
-  const URI = "http://localhost:8000/AllWorkshops";
+  const URI = "https://comprarte-backend-production.up.railway.app/AllWorkshops";
   const dispatch = useDispatch();
 
   const containerStyle2 = {

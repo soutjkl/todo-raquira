@@ -14,8 +14,8 @@ import { setProducts } from '../../features/cotizations/productSlice';
 export default function SearchComponent() {
 
 
-  const URI = 'http://localhost:8000/product'
-  const URI_SEARCH = 'http://localhost:8000/searchProducts'
+  const URI = 'https://comprarte-backend-production.up.railway.app/product'
+  const URI_SEARCH = 'https://comprarte-backend-production.up.railway.app/searchProducts'
 
   const [stringToSearch, setStringToSearch] = useState('')
   const [page, setPage] = useState(1)

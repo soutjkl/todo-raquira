@@ -10,7 +10,7 @@ export default function CategoriesComponent() {
   const categories = useSelector(state => state.categories)
   const [selectedCategory, setSelectedCategory] = useState({})
   const [selected, setSelected] = useState(false)
-  const URI = 'http://localhost:8000/categoriesAll'
+  const URI = 'https://comprarte-backend-production.up.railway.app/categoriesAll'
 
   useEffect(() => {
     getCategories()

@@ -8,7 +8,7 @@ import { clear } from '../../features/cotizations/cotizationDataSlice';
 export default function CotizationPrintComponent({state, setState}) {
     const cotizationData = useSelector(state => state.cotizationData)
     const dispatch = useDispatch()
-    const URI = "http://localhost:8000/quotes/"
+    const URI = "https://comprarte-backend-production.up.railway.app/quotes/"
 
     const printCotization = async () => {
         await axios.post(URI+'print', cotizationData)

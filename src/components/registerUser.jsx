@@ -16,7 +16,7 @@ import {
 import swal from "sweetalert";
 
 const RegisterUser = () => {
-  const URI = "http://localhost:8000/userCreate";
+  const URI = "https://comprarte-backend-production.up.railway.app/userCreate";
 
   const validate = (values) => {
     const errors = {};

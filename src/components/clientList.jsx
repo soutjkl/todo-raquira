@@ -29,7 +29,7 @@ const ClientList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
   const [selectedValues, setSelectedValues] = useState({});
-  const URI = "http://localhost:8000/cients";
+  const URI = "https://comprarte-backend-production.up.railway.app/cients";
   const dispatch = useDispatch();
 
   const toggle = (selectedCliente) => {
@@ -69,7 +69,7 @@ const ClientList = () => {
 
   const statusClient = async (id) => {
     await axios
-      .put(`http://localhost:8000/clients/update-state/${id}`,{
+      .put(`https://comprarte-backend-production.up.railway.app/clients/update-state/${id}`,{
       estado_cliente: "D",
       }).then(function (res) {
         if (res.status === 200) {
@@ -330,7 +330,7 @@ const ClientList = () => {
               estado_cliente: selectedValues.estado_cliente,
             }}
             onSubmit={async (values, { resetForm }) => {
-              await axios.put(`http://localhost:8000/clients/update/${values.id_cliente}`, {
+              await axios.put(`https://comprarte-backend-production.up.railway.app/clients/update/${values.id_cliente}`, {
                 name_customer: values.nombres_cliente,
                 lastname_customer: values.apellidos_cliente,
                 document_type: values.tipo_documento,

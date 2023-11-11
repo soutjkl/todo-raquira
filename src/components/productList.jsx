@@ -30,16 +30,16 @@ function ProductList() {
   const [selectedValues, setSelectedValues] = useState({});
   const productData = useSelector((status) => status.productCreateSlice);
   const dispatch = useDispatch();
-  const URI = "http://localhost:8000/product";
+  const URI = "https://comprarte-backend-production.up.railway.app/product";
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
-  const URI_SEARCH = "http://localhost:8000/searchProducts";
+  const URI_SEARCH = "https://comprarte-backend-production.up.railway.app/searchProducts";
   const [stringToSearch, setStringToSearch] = useState("");
   const [listCategory, setlistCategory] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:8000/categoriesAll");
+      const response = await fetch("https://comprarte-backend-production.up.railway.app/categoriesAll");
       const data = await response.json();
       setlistCategory(data);
     }
@@ -138,7 +138,7 @@ function ProductList() {
 
   const deleteProduct = async (id_product) => {
     await axios
-      .put(`http://localhost:8000/delete-product/${id_product}`)
+      .put(`https://comprarte-backend-production.up.railway.app/delete-product/${id_product}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -439,7 +439,7 @@ function ProductList() {
             }}
             onSubmit={async (values) => {
               await axios
-                .put(`http://localhost:8000/update/${values.id_product}`, {
+                .put(`https://comprarte-backend-production.up.railway.app/update/${values.id_product}`, {
                   id_category: values.categoria,
                   name_product: values.nombre_Producto,
                   description_product: values.descripcion,

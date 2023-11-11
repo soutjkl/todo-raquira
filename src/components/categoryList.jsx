@@ -45,7 +45,7 @@ const CategoryList = () => {
 
   const deleteCategory = async (id) => {
     await axios
-      .delete(`http://localhost:8000/delete-categories/${id}`)
+      .delete(`https://comprarte-backend-production.up.railway.app/delete-categories/${id}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -78,7 +78,7 @@ const CategoryList = () => {
   };
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:8000/categoriesAll");
+      const response = await fetch("https://comprarte-backend-production.up.railway.app/categoriesAll");
       const data = await response.json();
       setlistCategory(data);
     }
@@ -220,7 +220,7 @@ const CategoryList = () => {
             }}
             onSubmit={async (values, { resetForm }) => {
               if (isNewCategory) {
-                await axios.post("http://localhost:8000/categories/new-categories", {
+                await axios.post("https://comprarte-backend-production.up.railway.app/categories/new-categories", {
                   name_category: values.name_category }).then(function (res) {
                     if (res.status === 200) {
                       swal({
@@ -243,7 +243,7 @@ const CategoryList = () => {
               } else {
                 await axios
                   .put(
-                    `http://localhost:8000/categories/update/${values.id_category}`,
+                    `https://comprarte-backend-production.up.railway.app/categories/update/${values.id_category}`,
                     {
                       name_category: values.name_category,
                     }

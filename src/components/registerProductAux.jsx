@@ -18,14 +18,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const RegisterProductAux = () => {
-  const URI = "http://localhost:8000/createProduct";
+  const URI = "https://comprarte-backend-production.up.railway.app/createProduct";
   const productData = useSelector((status) => status.productCreateSlice);
   const dispatch = useDispatch();
   const [listCategory, setlistCategory] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:8000/categoriesAll");
+      const response = await fetch("https://comprarte-backend-production.up.railway.app/categoriesAll");
       const data = await response.json();
       setlistCategory(data);
     }

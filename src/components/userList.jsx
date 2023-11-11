@@ -65,7 +65,7 @@ const UserList = () => {
 
   const deleteUser = async (email_user) => {
     await axios
-      .delete(`https://comprarte-backend-production.up.railway.app/delete/${email_user}`)
+      .delete(`https://comprarte-backend-production.up.railway.app/delete-product/${email_user}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({

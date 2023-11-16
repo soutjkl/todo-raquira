@@ -27,7 +27,7 @@ const UserList = () => {
   const [modal, setModal] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
-  const URI = "https://comprarte-backend-production.up.railway.app/userAll";
+  const URI = "http://localhost:8000/userAll";
   const dispatch = useDispatch();
   const [selectedValues, setSelectedValues] = useState({});
 
@@ -65,7 +65,7 @@ const UserList = () => {
 
   const deleteUser = async (email_user) => {
     await axios
-      .delete(`https://comprarte-backend-production.up.railway.app/delete-product/${email_user}`)
+      .delete(`http://localhost:8000/delete/${email_user}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -297,7 +297,7 @@ const UserList = () => {
             }}
             onSubmit={async (values, { resetForm }) => {
               await axios
-                .put(`https://comprarte-backend-production.up.railway.app/user/${values.email}`, {
+                .put(`http://localhost:8000/user/${values.email}`, {
                   email_user: values.email,
                   user_name: values.name,
                   user_lastname: values.lastname,

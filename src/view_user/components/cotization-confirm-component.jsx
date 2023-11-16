@@ -12,7 +12,7 @@ export default function CotizationConfirmComponent({state, setState,setCotizatio
     const cotizationData = useSelector(state => state.cotizationData)
     const dispatch = useDispatch()
 
-    const URI = "https://comprarte-backend-production.up.railway.app/quotes/newQuote"
+    const URI = "http://localhost:8000/quotes/newQuote"
 
     const saveCotization = async () => {
         await axios.post(URI, cotizationData)

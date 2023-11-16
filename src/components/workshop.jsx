@@ -18,7 +18,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const Workshop = () => {
-  const URI = "https://comprarte-backend-production.up.railway.app/createWorkshop";
+  const URI = "http://localhost:8000/createWorkshop";
   const dispatch = useDispatch();
 
   const validate = (values) => {

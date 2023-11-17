@@ -149,13 +149,13 @@ const RegisterProductAux = () => {
               await axios
                 .post(URI, {
                   id_category: values.categoria,
-                  nombre_producto: values.nombre_Producto,
-                  descripcion: values.descripcion,
-                  cantidad: values.cantidad,
-                  referencia_producto: values.referencia,
-                  precio_unitario: values.precio_unitario,
-                  imagen_producto: productData.imagen,
-                  estado: values.estado_producto,
+                  name_product: values.nombre_Producto,
+                  description_product: values.descripcion,
+                  quantity: values.cantidad,
+                  product_reference: values.referencia,
+                  unit_price: values.precio_unitario,
+                  product_picture: productData.imagen,
+                  status_product: values.estado_producto,
                 })
                 .then(function (res) {
                   if (res.status === 200) {

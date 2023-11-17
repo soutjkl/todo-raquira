@@ -13,15 +13,15 @@ export default function ListItem({productItem}) {
 
         <div className="row  align-items-center">
             <div className="col-md-2 my-2">
-                <img src={productItem.product.imagen_producto} className="img-fluid " alt="..." style={{'maxWidth':'100px'}} />
+                <img src={productItem.product.product_picture} className="img-fluid " alt="..." style={{'maxWidth':'100px'}} />
             </div>
             <div className="col-md-10 my-2">
                 <div className='row m-0 gy-0'>
                     <div className='col-md-6'>
-                        <p id='text' >{productItem.product.nombre_producto}</p>
+                        <p id='text' >{productItem.product.name_product}</p>
                     </div>
                     <div className='col-md-6 text-end'>
-                        <p id='text' >Precio Unitario: ${productItem.product.precio_unitario.toLocaleString('es-CO')}</p>
+                        <p id='text' >Precio Unitario: ${productItem.product.unit_price.toLocaleString('es-CO')}</p>
                     </div>
                 </div>
                 <div className='row align-items-end m-0 gy-0'>

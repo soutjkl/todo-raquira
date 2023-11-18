@@ -24,7 +24,7 @@ export default function CotizationConfirmComponent({state, setState,setCotizatio
                         timer: 3000,
                     }).then(()=>{
                         setCotizationCreated(true)
-                        dispatch(setNumber(res.data.quotation_num))
+                        dispatch(setNumber(res.data.number_quote))
                     })
                 }
             })

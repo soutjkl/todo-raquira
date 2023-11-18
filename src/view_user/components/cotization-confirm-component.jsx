@@ -44,10 +44,10 @@ export default function CotizationConfirmComponent({state, setState,setCotizatio
                         </div>
                         <div className="card-body">
                             <blockquote className="blockquote mb-0">
-                                <p id='text' className='m-0'><strong>Nombre: </strong>{cotizationData.client.nombres_cliente + ' ' + cotizationData.client.apellidos_cliente}</p>
-                                <p id='text' className='m-0'><strong>Número de documento: </strong>{cotizationData.client.numero_documento}</p>
-                                <p id='text' className='m-0'><strong>Teléfono: </strong>{cotizationData.client.telefono}</p>
-                                <p id='text' className='m-0'><strong>Correo electrónico: </strong>{cotizationData.client.email}</p>
+                                <p id='text' className='m-0'><strong>Nombre: </strong>{cotizationData.client.name_customer + ' ' + cotizationData.client.lastname_customer}</p>
+                                <p id='text' className='m-0'><strong>Número de documento: </strong>{cotizationData.client.number_document}</p>
+                                <p id='text' className='m-0'><strong>Teléfono: </strong>{cotizationData.client.number_phone}</p>
+                                <p id='text' className='m-0'><strong>Correo electrónico: </strong>{cotizationData.client.email_customer}</p>
                             </blockquote>
                         </div>
                     </div>
@@ -65,13 +65,15 @@ export default function CotizationConfirmComponent({state, setState,setCotizatio
                         </thead>
                         <tbody>
                             {cotizationData.products.map((productItem, index) => {
+
+                                console.log("PRODUCTO---->", productItem);
                                 return (
                                     <tr>
                                         {/* <th scope="row"></th> */}
                                         <td>{productItem.product.nombre_producto}</td>
-                                        <td className='text-center'>{productItem.quantity}</td>
-                                        <td className='text-end'>$ {productItem.product.precio_unitario.toLocaleString('es-CO')}</td>
-                                        <td className='text-end'>$ {productItem.subtotal.toLocaleString('es-CO')}</td>
+                                        <td className='text-center'>{productItem.quantity_products}</td>
+                                        <td className='text-end'>$ {productItem.unit_price.toLocaleString('es-CO')}</td>
+                                        <td className='text-end'>$ {productItem.subtotal_quote.toLocaleString('es-CO')}</td>
                                     </tr>)
                             })}
 
@@ -83,7 +85,7 @@ export default function CotizationConfirmComponent({state, setState,setCotizatio
                 <div className='row mx-4'>
 
                     <div className='card text-end p-3'>
-                        <p id='text' className='m-0'><strong>Total: </strong> $ {cotizationData.total.toLocaleString('es-CO')}</p>
+                        <p id='text' className='m-0'><strong>Total: </strong> $ {cotizationData.total_quote.toLocaleString('es-CO')}</p>
                     </div>
 
                 </div>

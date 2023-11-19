@@ -11,6 +11,7 @@ import Quotes from "./quotes";
 import Login from "./Login";
 import Workshop from "./workshop";
 import WorkshopList from "./workshopList";
+import Reports from "./reports";
 
 const Menu = ({ handleLogout }) => {
   function LogOut() {
@@ -262,6 +263,30 @@ const Menu = ({ handleLogout }) => {
                       Talleres
                     </Link>
                   </li>
+                  <li
+                    className="nav-item"
+                    style={{ backgroundColor: "#D2691E" }}
+                  >
+                    <Link
+                      id="subtitle"
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/reports"
+                      style={{
+                        color: "#FFFFF3",
+                        textDecoration: "none",
+                        transition: "background-color 0.3s ease-in-out",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.target.style.backgroundColor = "#ba5106")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.target.style.backgroundColor = "#D2691E")
+                      }
+                    >
+                      Reportes
+                    </Link>
+                  </li>
                 </ul>
                 <span
                   className="navbar-text"
@@ -303,6 +328,8 @@ const Menu = ({ handleLogout }) => {
           <Route path="/clientes" element={<ClientList />}></Route>
           <Route path="/workshops" element={<Workshop />}></Route>
           <Route path="/AllWorkshops" element={<WorkshopList />}></Route>
+          <Route path="/reports" element={<Reports />}></Route>
+
         </Routes>
       </BrowserRouter>
     </>

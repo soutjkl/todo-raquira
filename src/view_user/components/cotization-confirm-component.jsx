@@ -70,10 +70,10 @@ export default function CotizationConfirmComponent({state, setState,setCotizatio
                                 return (
                                     <tr>
                                         {/* <th scope="row"></th> */}
-                                        <td>{productItem.product.nombre_producto}</td>
-                                        <td className='text-center'>{productItem.quantity_products}</td>
-                                        <td className='text-end'>$ {productItem.unit_price.toLocaleString('es-CO')}</td>
-                                        <td className='text-end'>$ {productItem.subtotal_quote.toLocaleString('es-CO')}</td>
+                                        <td>{productItem.product.name_product}</td>
+                                        <td className='text-center'>{productItem.quantity}</td>
+                                        <td className='text-end'>$ {productItem.product.unit_price.toLocaleString('es-CO')}</td>
+                                        <td className='text-end'>$ {productItem.subtotal.toLocaleString('es-CO')}</td>
                                     </tr>)
                             })}
 
@@ -85,7 +85,7 @@ export default function CotizationConfirmComponent({state, setState,setCotizatio
                 <div className='row mx-4'>
 
                     <div className='card text-end p-3'>
-                        <p id='text' className='m-0'><strong>Total: </strong> $ {cotizationData.total_quote.toLocaleString('es-CO')}</p>
+                        <p id='text' className='m-0'><strong>Total: </strong> $ {cotizationData.total.toLocaleString('es-CO')}</p>
                     </div>
 
                 </div>

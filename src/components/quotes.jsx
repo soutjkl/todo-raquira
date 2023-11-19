@@ -75,11 +75,11 @@ const Quotes = () => {
 								{listQuote.map((list_item, index) => {
 									return (
 										<tr>
-											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.numero_cotizacion}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.datos_cliente.nombres_cliente + ' ' + list_item.datos_cliente.apellidos_cliente}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.fecha_cotizacion}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.subtotal.toLocaleString('es-CO')}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.total.toLocaleString('es-CO')}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.number_quote}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.customer_data.name_customer + ' ' + list_item.customer_data.lastname_customer}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.date_quote}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.subtotal_quote.toLocaleString('es-CO')}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.total_quote.toLocaleString('es-CO')}</td>
 										</tr>
 									)
 								})}

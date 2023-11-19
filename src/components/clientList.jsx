@@ -67,10 +67,10 @@ const ClientList = () => {
     setMaxPage(Math.ceil(listClient.length / 10));
   }, [listClient, dispatch]);
 
-  const statusClient = async (id) => {
+  const statusClient = async (id_customer) => {
     await axios
-      .put(`http://localhost:8000/clients/update-state/${id}`,{
-      estado_cliente: "D",
+      .delete(`http://localhost:8000/clients/update-state/${id_customer}`,{
+      status_customer: "D",
       }).then(function (res) {
         if (res.status === 200) {
           swal({
@@ -248,7 +248,7 @@ const ClientList = () => {
                           </button>
                           <button
                             className="btn btn-danger"
-                            onClick={() => statusClient(list_item.id_cliente)}
+                            onClick={() => statusClient(list_item.id_customer)}
                             style={{
                               color: "#D2691E",
                               border: "none",

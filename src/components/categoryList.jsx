@@ -242,7 +242,7 @@ const CategoryList = () => {
                   });
               } else {
                 await axios
-                  .put(
+                  .delete(
                     `http://localhost:8000/categories/update/${values.id_category}`,
                     {
                       name_category: values.name_category,

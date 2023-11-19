@@ -1,15 +1,52 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import PersonSpinner from "./person-spinner-component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import WorkshopInfoComponent from "./info-workshop-component";
 import { PiUsersLight } from "react-icons/pi";
 import { TfiWorld } from "react-icons/tfi";
+import { setWorkshop } from "../../features/workshop/workshopSlicle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faMagnifyingGlass,
+  faArrowRight,
+  faArrowLeft,
+  faExclamationCircle,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function WorkshopComponent({ fecha }) {
   const [listworkshop, setlistworkshop] = useState([]);
   const URI = "http://localhost:8000/AllWorkshops";
   const dispatch = useDispatch();
+  const [maxPage, setMaxPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [topPage, setTopPage] = useState(1);
+
+  useEffect(() => {
+    getWorkshop();
+  }, []);
+
+  const getWorkshop = async () => {
+    try {
+      await axios.get(URI).then(function (res) {
+        dispatch(setlistworkshop(res.data));
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+  useEffect(() => {
+    setTopPage(Math.ceil(listworkshop.length / 2));
+  }, [listworkshop, dispatch]);
+
+  const nextPage = () => {
+    if (page < topPage) setPage(page + 1);
+  };
+
+  const prevPage = () => {
+    if (page > 1) setPage(page - 1);
+  };
 
   const priceStyle = {
     color: "#D2691E",
@@ -39,16 +76,19 @@ export default function WorkshopComponent({ fecha }) {
   useEffect(() => {
     getlistworkshop();
   }, []);
+  const startIndex = (page - 1) * 2;
+  const endIndex = startIndex + 2;
 
   return (
     <div>
-      {listworkshop.map((list_item, index) => (
+      {listworkshop.slice(startIndex, endIndex).map((list_item, index) => (
         <>
           <div
             style={{
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "space-between",
+              padding:"20px"
             }}
           >
             <div key={index} style={{ flexBasis: "25%", padding: "25px" }}>
@@ -114,7 +154,7 @@ export default function WorkshopComponent({ fecha }) {
               style={{
                 flexBasis: "25%",
                 padding: "25px",
-                backgroundColor: "white"
+                backgroundColor: "white",
               }}
             >
               <label>Desde</label>
@@ -146,6 +186,34 @@ export default function WorkshopComponent({ fecha }) {
           />
         </>
       ))}
+      {listworkshop.length > 0 && (
+        <div className="row m-4 justify-content-end">
+          <div className="col-3 m-4 position-absolute bottom-0">
+            <div className="float-end">
+              {page > 1 && (
+                <button
+                  className="btn btn-primary m-1"
+                  style={{ color: "white" }}
+                  id="subtitle"
+                  onClick={prevPage}
+                >
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+              )}
+              {page < topPage && (
+                <button
+                  className="btn btn-primary m-1"
+                  style={{ color: "white" }}
+                  id="subtitle"
+                  onClick={nextPage}
+                >
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

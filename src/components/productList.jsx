@@ -138,7 +138,7 @@ function ProductList() {
 
   const deleteProduct = async (id_product) => {
     await axios
-      .put(`http://localhost:8000/delete-product/${id_product}`)
+      .delete(`http://localhost:8000/delete-product/${id_product}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({

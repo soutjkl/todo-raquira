@@ -14,7 +14,7 @@ import { setProducts } from '../../features/cotizations/productSlice';
 export default function CategoryComponent({ category, goBack }) {
 
 
-    const URI = `http://localhost:8000/product/category/${category.id_category}`
+    const URI = `https://comprarte-backend-production.up.railway.app/product/category/${category.id_category}`
     const [page, setPage] = useState(1)
     const [topPage, setTopPage] = useState(1)
     const dispatch = useDispatch()

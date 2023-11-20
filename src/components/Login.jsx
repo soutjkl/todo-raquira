@@ -28,7 +28,7 @@ const Login = () => {
 
   const logIn = async (values) => {
     try {
-      const response = await axios.post("http://localhost:8000/login", values);
+      const response = await axios.post("https://comprarte-backend-production.up.railway.app/login", values);
       const { token, rol } = response.data;
       localStorage.setItem("authToken", token);
       localStorage.setItem("userRole", rol);

@@ -20,7 +20,7 @@ import {
 
 export default function WorkshopComponent({ fecha }) {
   const [listworkshop, setlistworkshop] = useState([]);
-  const URI = "http://localhost:8000/AllWorkshops";
+  const URI = "https://comprarte-backend-production.up.railway.app/AllWorkshops";
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [maxPage, setMaxPage] = useState(0);
@@ -84,7 +84,7 @@ export default function WorkshopComponent({ fecha }) {
 
   const capacityWorkshop = async (id_workshop, capacity) => {
     await axios
-      .put(`http://localhost:8000/updateWorkshop/${id_workshop}`, {
+      .put(`https://comprarte-backend-production.up.railway.app/updateWorkshop/${id_workshop}`, {
         capacity_workshop: capacity - 1,
       })
       .then(function (res) {

@@ -16,7 +16,7 @@ const Quotes = () => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const response = await fetch("http://localhost:8000/quotesAll");
+			const response = await fetch("https://comprarte-backend-production.up.railway.app/quotesAll");
 			const data = await response.json();
 			setlistQuote(data);
 		}
@@ -103,7 +103,7 @@ const Quotes = () => {
 							rol: "",
 						}}
 						onSubmit={async (values, { resetForm }) => {
-							await axios.put(`http://localhost:8000/user/${values.email}`, {
+							await axios.put(`https://comprarte-backend-production.up.railway.app/user/${values.email}`, {
 								email: values.email, name: values.name, lastname: values.lastName,
 								password: values.password, rol: values.rol
 							}).then(function (res) {

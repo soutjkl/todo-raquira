@@ -29,7 +29,7 @@ const WorkshopList = () => {
   const [modal, setModal] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
-  const URI = "http://localhost:8000/AllWorkshops";
+  const URI = "https://comprarte-backend-production.up.railway.app/AllWorkshops";
   const dispatch = useDispatch();
   const [selectedValues, setSelectedValues] = useState({});
 
@@ -71,7 +71,7 @@ const WorkshopList = () => {
 
   const deleteWorkshop = async (id_workshop) => {
     await axios
-      .delete(`http://localhost:8000/deleteWorkshop/${id_workshop}`)
+      .delete(`https://comprarte-backend-production.up.railway.app/deleteWorkshop/${id_workshop}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -363,7 +363,7 @@ const WorkshopList = () => {
             onSubmit={async (values, { resetForm }) => {
               await axios
                 .put(
-                  `http://localhost:8000/updateWorkshop/${values.id_workshop}`,
+                  `https://comprarte-backend-production.up.railway.app/updateWorkshop/${values.id_workshop}`,
                   {
                     name_workshop: values.name_workshop,
                     price_workshop: values.price_workshop,

@@ -9,8 +9,8 @@ import { setClientData } from '../../features/cotizations/cotizationDataSlice';
 
 export default function ClientDataComponent({ state, setState, setClientCreated }) {
 
-    const URI = "http://localhost:8000/clients/new-client"
-    const URI_SEARCH = "http://localhost:8000/clients/search/"
+    const URI = "https://comprarte-backend-production.up.railway.app/clients/new-client"
+    const URI_SEARCH = "https://comprarte-backend-production.up.railway.app/clients/search/"
 
     const dispatch = useDispatch()
     const clientData = useSelector(state => state.cotizationData.client)

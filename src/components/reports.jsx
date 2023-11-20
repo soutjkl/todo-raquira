@@ -20,8 +20,8 @@ const UserList = () => {
   const [workshopCapacity, setWorkshopCapacity] = useState([]);
 
 
-  const URI = "https://comprarte-backend-production.up.railway.app/userAll";
-  const URI_WORKSHOP = "https://comprarte-backend-production.up.railway.app/AllWorkshops";
+  const URI = "http://localhost:8000/userAll";
+  const URI_WORKSHOP = "http://localhost:8000/AllWorkshops";
 
   const dispatch = useDispatch();
   useEffect(() => {

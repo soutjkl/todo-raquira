@@ -36,7 +36,7 @@ const CategoryList = () => {
     setSelectedCategoryId(categoryId);
     if (categoryId) {
       const selectedCategory = listCategory.find(category => category.id_category === categoryId);
-      setSelectedCategoryName(selectedCategory ? selectedCategory.name_category : null);
+      setSelectedCategoryName(selectedCategory ? selectedCategory.nombre_categoria : null);
     } else {
       setSelectedCategoryName(null);
     }
@@ -70,9 +70,9 @@ const CategoryList = () => {
   const validate = (values) => {
     const errors = {};
     if (!values.name_category) {
-      errors.name = "Requerido";
-    } else if (values.name_category.length > 20) {
-      errors.name = "Debe tener 10 caracteres o menos";
+      errors.name_category = "Requerido";
+    } else if (values.name_category.length > 10) {
+      errors.name_category = "Debe tener 10 caracteres o menos";
     }
     return errors;
   };

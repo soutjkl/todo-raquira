@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react'
 import ListItem from './list-item-component'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,7 +24,7 @@ export default function CotizationComponent() {
   const calculateTotal = () => {
     let total = 0
     cotizationData.products.map((productItem) => {
-      total = total + (productItem.product.precio_unitario * productItem.quantity)
+      total = total + (productItem.product.unit_price * productItem.quantity)
     })
 
     return total

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import PersonSpinner from "./person-spinner-component";
@@ -5,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import WorkshopInfoComponent from "./info-workshop-component";
 import { PiUsersLight } from "react-icons/pi";
 import { TfiWorld } from "react-icons/tfi";
+import swal from "sweetalert";
+import { Button } from "reactstrap";
 import { setWorkshop } from "../../features/workshop/workshopSlicle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -19,6 +22,7 @@ export default function WorkshopComponent({ fecha }) {
   const [listworkshop, setlistworkshop] = useState([]);
   const URI = "http://localhost:8000/AllWorkshops";
   const dispatch = useDispatch();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [maxPage, setMaxPage] = useState(0);
   const [page, setPage] = useState(1);
   const [topPage, setTopPage] = useState(1);
@@ -73,9 +77,36 @@ export default function WorkshopComponent({ fecha }) {
       console.log("Error", error);
     }
   };
+
   useEffect(() => {
     getlistworkshop();
   }, []);
+
+  const capacityWorkshop = async (id_workshop, capacity) => {
+    await axios
+      .put(`http://localhost:8000/updateWorkshop/${id_workshop}`, {
+        capacity_workshop: capacity - 1,
+      })
+      .then(function (res) {
+        if (res.status === 200) {
+          swal({
+            title: "Éxito",
+            text: "Reserva registrada exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          getlistworkshop(); 
+        } else {
+          swal({
+            title: "Fallo",
+            text: "Sin reservar",
+            icon: "error",
+            timer: 2000,
+          });
+        }
+      });
+  };
   const startIndex = (page - 1) * 2;
   const endIndex = startIndex + 2;
 
@@ -154,7 +185,7 @@ export default function WorkshopComponent({ fecha }) {
               style={{
                 flexBasis: "25%",
                 padding: "25px",
-                backgroundColor: "white",
+                backgroundColor: "white",,
               }}
             >
               <label>Desde</label>
@@ -170,7 +201,16 @@ export default function WorkshopComponent({ fecha }) {
                 <strong># Personas</strong>
                 <PersonSpinner />
               </div>
-              <button className="btn btn-primary" style={buttonStyle}>
+              <button
+                className="btn btn-primary"
+                onClick={() =>
+                  capacityWorkshop(
+                    list_item.id_workshop,
+                    list_item.capacity_workshop
+                  )
+                }
+                style={buttonStyle}
+              >
                 Reservar
               </button>
             </div>

@@ -185,7 +185,7 @@ export default function WorkshopComponent({ fecha }) {
               style={{
                 flexBasis: "25%",
                 padding: "25px",
-                backgroundColor: "white",,
+                backgroundColor: "white",
               }}
             >
               <label>Desde</label>

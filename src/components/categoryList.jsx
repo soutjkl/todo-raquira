@@ -36,7 +36,7 @@ const CategoryList = () => {
     setSelectedCategoryId(categoryId);
     if (categoryId) {
       const selectedCategory = listCategory.find(category => category.id_category === categoryId);
-      setSelectedCategoryName(selectedCategory ? selectedCategory.name_category : null);
+      setSelectedCategoryName(selectedCategory ? selectedCategory.nombre_categoria : null);
     } else {
       setSelectedCategoryName(null);
     }
@@ -45,7 +45,7 @@ const CategoryList = () => {
 
   const deleteCategory = async (id) => {
     await axios
-      .delete(`http://localhost:8000/delete-categories/${id}`)
+      .put(`http://localhost:8000/delete-categories/${id}`)
       .then(function (res) {
         if (res.status === 200) {
           swal({
@@ -70,9 +70,9 @@ const CategoryList = () => {
   const validate = (values) => {
     const errors = {};
     if (!values.name_category) {
-      errors.name = "Requerido";
-    } else if (values.name_category.length > 20) {
-      errors.name = "Debe tener 10 caracteres o menos";
+      errors.name_category = "Requerido";
+    } else if (values.name_category.length > 10) {
+      errors.name_category = "Debe tener 10 caracteres o menos";
     }
     return errors;
   };
@@ -221,7 +221,7 @@ const CategoryList = () => {
             onSubmit={async (values, { resetForm }) => {
               if (isNewCategory) {
                 await axios.post("http://localhost:8000/categories/new-categories", {
-                  name_category: values.name_category }).then(function (res) {
+                    name_category: values.name_category }).then(function (res) {
                     if (res.status === 200) {
                       swal({
                         title: "Éxito",
@@ -242,7 +242,7 @@ const CategoryList = () => {
                   });
               } else {
                 await axios
-                  .delete(
+                  .put(
                     `http://localhost:8000/categories/update/${values.id_category}`,
                     {
                       name_category: values.name_category,

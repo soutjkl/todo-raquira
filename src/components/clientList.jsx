@@ -29,7 +29,7 @@ const ClientList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);
   const [selectedValues, setSelectedValues] = useState({});
-  const URI = "https://comprarte-backend-production.up.railway.app/cients";
+  const URI = "http://localhost:8000/cients";
   const dispatch = useDispatch();
 
   const toggle = (selectedCliente) => {
@@ -67,10 +67,10 @@ const ClientList = () => {
     setMaxPage(Math.ceil(listClient.length / 10));
   }, [listClient, dispatch]);
 
-  const statusClient = async (id) => {
+  const statusClient = async (id_customer) => {
     await axios
-      .put(`https://comprarte-backend-production.up.railway.app/clients/update-state/${id}`,{
-      estado_cliente: "D",
+      .delete(`http://localhost:8000/clients/update-state/${id_customer}`,{
+      status_customer: "D",
       }).then(function (res) {
         if (res.status === 200) {
           swal({
@@ -248,7 +248,7 @@ const ClientList = () => {
                           </button>
                           <button
                             className="btn btn-danger"
-                            onClick={() => statusClient(list_item.id_cliente)}
+                            onClick={() => statusClient(list_item.id_customer)}
                             style={{
                               color: "#D2691E",
                               border: "none",
@@ -330,7 +330,7 @@ const ClientList = () => {
               estado_cliente: selectedValues.estado_cliente,
             }}
             onSubmit={async (values, { resetForm }) => {
-              await axios.put(`https://comprarte-backend-production.up.railway.app/clients/update/${values.id_cliente}`, {
+              await axios.put(`http://localhost:8000/clients/update/${values.id_cliente}`, {
                 name_customer: values.nombres_cliente,
                 lastname_customer: values.apellidos_cliente,
                 document_type: values.tipo_documento,

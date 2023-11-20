@@ -16,7 +16,7 @@ const Quotes = () => {
 
 	useEffect(() => {
 		async function fetchData() {
-			const response = await fetch("https://comprarte-backend-production.up.railway.app/quotesAll");
+			const response = await fetch("http://localhost:8000/quotesAll");
 			const data = await response.json();
 			setlistQuote(data);
 		}
@@ -75,11 +75,11 @@ const Quotes = () => {
 								{listQuote.map((list_item, index) => {
 									return (
 										<tr>
-											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.numero_cotizacion}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.datos_cliente.nombres_cliente + ' ' + list_item.datos_cliente.apellidos_cliente}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.fecha_cotizacion}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.subtotal.toLocaleString('es-CO')}</td>
-											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.total.toLocaleString('es-CO')}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.number_quote}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.customer_data.name_customer + ' ' + list_item.customer_data.lastname_customer}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'center' }}>{list_item.date_quote}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.subtotal_quote.toLocaleString('es-CO')}</td>
+											<td id="table-cell" key={index} style={{ textAlign: 'end' }}>${list_item.total_quote.toLocaleString('es-CO')}</td>
 										</tr>
 									)
 								})}
@@ -103,7 +103,7 @@ const Quotes = () => {
 							rol: "",
 						}}
 						onSubmit={async (values, { resetForm }) => {
-							await axios.put(`https://comprarte-backend-production.up.railway.app/user/${values.email}`, {
+							await axios.put(`http://localhost:8000/user/${values.email}`, {
 								email: values.email, name: values.name, lastname: values.lastName,
 								password: values.password, rol: values.rol
 							}).then(function (res) {

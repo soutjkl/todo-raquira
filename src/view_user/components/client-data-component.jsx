@@ -9,8 +9,8 @@ import { setClientData } from '../../features/cotizations/cotizationDataSlice';
 
 export default function ClientDataComponent({ state, setState, setClientCreated }) {
 
-    const URI = "https://comprarte-backend-production.up.railway.app/clients/new-client"
-    const URI_SEARCH = "https://comprarte-backend-production.up.railway.app/clients/search/"
+    const URI = "http://localhost:8000/clients/new-client"
+    const URI_SEARCH = "http://localhost:8000/clients/search/"
 
     const dispatch = useDispatch()
     const clientData = useSelector(state => state.cotizationData.client)
@@ -22,35 +22,34 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
     const validate = (values) => {
         const errors = {};
 
-        if (!values.tipo_documento) {
-            errors.tipo_documento = 'Campo Requerido';
+        if (!values.document_type) {
+            errors.document_type = 'Campo Requerido';
         }
-        if (!values.numero_documento) {
-            errors.numero_documento = 'Campo Requerido';
-        } else if (values.numero_documento.length >= 30) {
-            errors.numero_documento = 'Máximo puede contener 30 caracteres';
+        if (!values.number_document) {
+            errors.number_document = 'Campo Requerido';
+        } else if (values.number_document.length >= 30) {
+            errors.number_document = 'Máximo puede contener 30 caracteres';
         }
         if (!clientExists) {
-
-            if (!values.nombres_cliente) {
-                errors.nombres_cliente = 'Campo Requerido';
-            } else if (values.nombres_cliente.length >= 50) {
-                errors.nombres_cliente = 'Máximo puede contener 50 caracteres';
+            if (!values.name_customer) {
+                errors.name_customer = 'Campo Requerido';
+            } else if (values.name_customer.length >= 50) {
+                errors.name_customer = 'Máximo puede contener 50 caracteres';
             }
-            if (!values.apellidos_cliente) {
-                errors.apellidos_cliente = 'Campo Requerido';
-            } else if (values.apellidos_cliente.length >= 50) {
-                errors.apellidos_cliente = 'Máximo puede contener 50 caracteres';
+            if (!values.lastname_customer) {
+                errors.lastname_customer = 'Campo Requerido';
+            } else if (values.lastname_customer.length >= 50) {
+                errors.lastname_customer = 'Máximo puede contener 50 caracteres';
             }
-            if (!values.email) {
-                errors.email = 'Requerido';
-            } else if (values.email.length >= 50) {
-                errors.email = 'Máximo puede contener 50 caracteres';
+            if (!values.email_customer) {
+                errors.email_customer = 'Requerido';
+            } else if (values.email_customer.length >= 50) {
+                errors.email_customer = 'Máximo puede contener 50 caracteres';
             }
-            if (!values.telefono) {
-                errors.telefono = 'Requerido';
-            } else if (values.telefono.length >= 20) {
-                errors.telefono = 'Máximo puede contener 20 caracteres';
+            if (!values.number_phone) {
+                errors.number_phone = 'Requerido';
+            } else if (values.number_phone.length >= 20) {
+                errors.number_phone = 'Máximo puede contener 20 caracteres';
             }
         }
 
@@ -59,13 +58,13 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
 
     const validateTwo = (values) => {
         const errors = {};
-        if (!values.tipo_documento) {
-            errors.tipo_documento = 'Campo Requerido';
+        if (!values.document_type) {
+            errors.document_type = 'Campo Requerido';
         }
-        if (!values.numero_documento) {
-            errors.numero_documento = 'Campo Requerido';
-        } else if (values.numero_documento.length >= 30) {
-            errors.numero_documento = 'Máximo puede contener 30 caracteres';
+        if (!values.number_document) {
+            errors.number_document = 'Campo Requerido';
+        } else if (values.number_document.length >= 30) {
+            errors.number_document = 'Máximo puede contener 30 caracteres';
         }
         return errors;
     }
@@ -78,19 +77,19 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                 <Card style={{ background: 'none', border: 'none' }}>
                     <Formik
                         initialValues={{
-                            nombres_cliente: "",
-                            apellidos_cliente: "",
-                            tipo_documento: "",
-                            numero_documento: "",
-                            email: "",
-                            telefono: "",
-                            estado_cliente: "A",
+                            name_customer: "",
+                            lastname_customer: "",
+                            document_type: "",
+                            number_document: "",
+                            email_customer: "",
+                            number_phone: "",
+                            status_customer: "A",
                         }}
                         onSubmit={async (values) => {
                             if (clientExists) {
                                 await axios.post(URI_SEARCH, {
-                                    tipo_documento: values.tipo_documento,
-                                    numero_documento: values.numero_documento
+                                    document_type: values.document_type,
+                                    number_document: values.number_document
                                 }).then(function (res) {
                                     if (res.status === 200) {
                                         swal({
@@ -100,14 +99,14 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                         });
                                         setClientCreated(true)
                                         dispatch(setClientData({
-                                            id_cliente: res.data.id_client,
-                                            nombres_cliente: res.data.nombres_cliente,
-                                            apellidos_cliente: res.data.apellidos_cliente,
-                                            tipo_documento: res.data.tipo_documento,
-                                            numero_documento: res.data.numero_documento,
-                                            telefono: res.data.telefono,
-                                            email: res.data.email,
-                                            estado_cliente: res.data.estado_cliente
+                                            id_customer: res.data.id_customer,
+                                            name_customer: res.data.name_customer,
+                                            lastname_customer: res.data.lastname_customer,
+                                            document_type: res.data.document_type,
+                                            number_document: res.data.number_document,
+                                            number_phone: res.data.number_phone,
+                                            email_customer: res.data.email_customer,
+                                            status_customer: res.data.status_customer
                                         }))
                                     } else if (res.status === 204) {
                                         swal({
@@ -115,8 +114,8 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                             icon: "info",
                                             timer: 2000,
                                         });
-                                        setDocNumber(values.numero_documento)
-                                        setDocType(values.tipo_documento)
+                                        setDocNumber(values.number_document)
+                                        setDocType(values.document_type)
                                         setClientCreated(false)
                                         setClientExists(false)
 
@@ -134,13 +133,13 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
 
                             } else {
                                 await axios.post(URI, {
-                                    nombres_cliente: values.nombres_cliente,
-                                    apellidos_cliente: values.apellidos_cliente,
-                                    tipo_documento: values.tipo_documento,
-                                    numero_documento: values.numero_documento,
-                                    telefono: values.telefono,
-                                    email: values.email,
-                                    estado_cliente: values.estado_cliente
+                                    name_customer: values.name_customer,
+                                    lastname_customer: values.lastname_customer,
+                                    document_type: values.document_type,
+                                    number_document: values.number_document,
+                                    number_phone: values.number_phone,
+                                    email_customer: values.email_customer,
+                                    status_customer: values.status_customer
                                 }).then(function (res) {
 
                                     if (res.status === 200) {
@@ -152,14 +151,14 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                         });
                                         setClientCreated(true)
                                         dispatch(setClientData({
-                                            id_cliente: res.data.id_client,
-                                            nombres_cliente: values.nombres_cliente,
-                                            apellidos_cliente: values.apellidos_cliente,
-                                            tipo_documento: values.tipo_documento,
-                                            numero_documento: values.numero_documento,
-                                            telefono: values.telefono,
-                                            email: values.email,
-                                            estado_cliente: values.estado_cliente
+                                            id_customer: res.data.id_client,
+                                            name_customer: values.name_customer,
+                                            lastname_customer: values.lastname_customer,
+                                            document_type: values.document_type,
+                                            number_document: values.number_document,
+                                            number_phone: values.number_phone,
+                                            email: values.email_customer,
+                                            status_customer: values.status_customer
                                         }))
                                     } else {
                                         swal({
@@ -194,15 +193,15 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                     <Row className='mt-5'>
                                         <Col md={6} style={{width:'400px'}}>
                                             <FormGroup>
-                                                <Label id='subtitle' for="tipo_documento" >Tipo de Documento:</Label>
+                                                <Label id='subtitle' for="document_type" >Tipo de Documento:</Label>
                                                 <Input
                                                     id='text'
                                                     type="select"
-                                                    name="tipo_documento" 
-                                                    invalid={errors.tipo_documento && touched.tipo_documento}
+                                                    name="document_type" 
+                                                    invalid={errors.document_type && touched.document_type}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    value={values.tipo_documento}
+                                                    value={values.document_type}
                                                     disabled={!clientExists}
                                                 >
                                                     <option value={''}>Seleccione un valor</option>
@@ -213,55 +212,55 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                                     <option value={'NT'}>NIT</option>
                                                     <option value={'PS'}>Pasaporte</option>
                                                 </Input>
-                                                <FormFeedback>{errors.tipo_documento}</FormFeedback>
+                                                <FormFeedback>{errors.document_type}</FormFeedback>
                                             </FormGroup>
                                             {!clientExists &&
                                                 <FormGroup >
-                                                    <Label id='subtitle' for="nombres_cliente" >
+                                                    <Label id='subtitle' for="name_customer" >
                                                         Nombres:
                                                     </Label>
                                                     <Input
                                                         id='text'
                                                         type="text"
-                                                        name="nombres_cliente"
-                                                        invalid={errors.nombres_cliente && touched.nombres_cliente}
+                                                        name="name_customer"
+                                                        invalid={errors.name_customer && touched.name_customer}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
-                                                        value={values.nombres_cliente}
+                                                        value={values.name_customer}
                                                         style={{ textAlign: "justify" }}
                                                     />
-                                                    <FormFeedback>{errors.nombres_cliente}</FormFeedback>
+                                                    <FormFeedback>{errors.name_customer}</FormFeedback>
                                                 </FormGroup>
                                             }
 
                                         </Col>
                                         <Col md={6} style={{width:'400px'}}>
                                             <FormGroup>
-                                                <Label id='subtitle' for="numero_documento" >Número de Documento:</Label>
+                                                <Label id='subtitle' for="number_document" >Número de Documento:</Label>
                                                 <Input id='text'
                                                     type="text"
-                                                    name="numero_documento"
-                                                    invalid={errors.numero_documento && touched.numero_documento}
+                                                    name="number_document"
+                                                    invalid={errors.number_document && touched.number_document}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    value={values.numero_documento}
+                                                    value={values.number_document}
                                                     disabled={!clientExists}
                                                 />
-                                                <FormFeedback>{errors.numero_documento}</FormFeedback>
+                                                <FormFeedback>{errors.number_document}</FormFeedback>
                                             </FormGroup>
                                             {!clientExists &&
                                                 <FormGroup>
-                                                    <Label id='subtitle' for="apellidos_cliente" >Apellidos:</Label>
+                                                    <Label id='subtitle' for="lastname_customer" >Apellidos:</Label>
                                                     <Input
                                                         id='text'
                                                         type="text"
-                                                        name="apellidos_cliente"
-                                                        invalid={errors.apellidos_cliente && touched.apellidos_cliente}
+                                                        name="lastname_customer"
+                                                        invalid={errors.lastname_customer && touched.lastname_customer}
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
-                                                        value={values.apellidos_cliente}
+                                                        value={values.lastname_customer}
                                                     />
-                                                    <FormFeedback>{errors.apellidos_cliente}</FormFeedback>
+                                                    <FormFeedback>{errors.lastname_customer}</FormFeedback>
                                                 </FormGroup>
                                             }
                                         </Col>
@@ -269,33 +268,33 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                                             <>
                                                 <Col md={6} style={{width:'400px'}}> 
                                                     <FormGroup>
-                                                        <Label id='subtitle' for="email" >Correo electrónico:</Label>
+                                                        <Label id='subtitle' for="email_customer" >Correo electrónico:</Label>
                                                         <Input
                                                             id='text'
                                                             type="email"
-                                                            name="email"
-                                                            invalid={errors.email && touched.email}
+                                                            name="email_customer"
+                                                            invalid={errors.email_customer && touched.email_customer}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
-                                                            value={values.email}
+                                                            value={values.email_customer}
                                                         />
-                                                        <FormFeedback>{errors.email}</FormFeedback>
+                                                        <FormFeedback>{errors.email_customer}</FormFeedback>
                                                     </FormGroup>
 
                                                 </Col>
                                                 <Col md={6} style={{width:'400px'}}>
                                                     <FormGroup>
-                                                        <Label id='subtitle' for="telefono" >Teléfono:</Label>
+                                                        <Label id='subtitle' for="number_phone" >Teléfono:</Label>
                                                         <Input
                                                             id='text'
                                                             type="phone"
-                                                            name="telefono"
-                                                            invalid={errors.telefono && touched.telefono}
+                                                            name="number_phone"
+                                                            invalid={errors.number_phone && touched.number_phone}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
-                                                            value={values.telefono}
+                                                            value={values.number_phone}
                                                         />
-                                                        <FormFeedback>{errors.telefono}</FormFeedback>
+                                                        <FormFeedback>{errors.number_phone}</FormFeedback>
                                                     </FormGroup>
                                                 </Col>
 
@@ -322,133 +321,6 @@ export default function ClientDataComponent({ state, setState, setClientCreated 
                     </Formik>
                 </Card>
             </Container>
-       { /* 
-       {clientExists &&
-        <Container id='form' className="pb-5">
-                    <Card style={{ background: 'none', border: 'none' }}>
-                        <Formik
-                            initialValues={{
-                                tipo_documento: "",
-                                numero_documento: "",
-                            }}
-                            onSubmit={async (values) => {
-                                await axios.post(URI_SEARCH, {
-                                    tipo_documento: values.tipo_documento,
-                                    numero_documento: values.numero_documento
-                                }).then(function (res) {
-                                    if (res.status === 200) {
-                                        swal({
-                                            title: "Cliente ya registrado",
-                                            icon: "success",
-                                            timer: 2000,
-                                        });
-                                        setClientCreated(true)
-                                        dispatch(setClientData({
-                                            id_cliente: res.data.id_client,
-                                            nombres_cliente: res.data.nombres_cliente,
-                                            apellidos_cliente: res.data.apellidos_cliente,
-                                            tipo_documento: res.data.tipo_documento,
-                                            numero_documento: res.data.numero_documento,
-                                            telefono: res.data.telefono,
-                                            email: res.data.email,
-                                            estado_cliente: res.data.estado_cliente
-                                        }))
-                                    } else if (res.status === 204) {
-                                        swal({
-                                            title: "Fallo",
-                                            text: "No esta registrado",
-                                            icon: "error",
-                                            timer: 2000,
-                                        });
-                                        setDocNumber(values.numero_documento)
-                                        setDocType(values.tipo_documento)
-                                        setClientCreated(false)
-                                        setClientExists(false)
-
-                                    } else {
-                                        swal({
-                                            title: "Fallo",
-                                            text: "Hubo un problema al validar los datos del cliente",
-                                            icon: "error",
-                                            timer: 2000,
-                                        });
-                                        setClientExists(false)
-                                        setClientCreated(false)
-                                    }
-                                })
-                            }}
-
-                            validate={validateTwo}
-                        >
-                            {(props) => {
-                                const {
-                                    values,
-                                    errors,
-                                    touched,
-                                    handleChange,
-                                    handleBlur,
-                                    handleSubmit,
-                                    isSubmitting,
-                                } = props;
-                                return (
-                                    <Form onSubmit={handleSubmit} className="mx-5" style={{ textAlign: 'left' }}>
-                                        <h5 className='my-4' id='title'>DATOS DEL CLIENTE</h5>
-                                        <Row className='mt-5'>
-                                            <Col md={6}>
-                                                <FormGroup>
-                                                    <Label id='subtitle' for="tipo_documento" >Tipo de Documento:</Label>
-                                                    <Input
-                                                        id='text'
-                                                        type="select"
-                                                        name="tipo_documento"
-                                                        // placeholder="nombre"
-                                                        invalid={errors.tipo_documento && touched.tipo_documento}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.tipo_documento}
-                                                        >
-                                                        <option value={'CC'}>Cédula de Ciudadania</option>
-                                                        <option value={'TI'}>Tarjeta de Identidad</option>
-                                                        <option value={'CE'}>Cédula de Extranjería</option>
-                                                        <option value={'TE'}>Tarjeta de Extranjería</option>
-                                                        <option value={'NT'}>NIT</option>
-                                                        <option value={'PS'}>Pasaporte</option>
-                                                    </Input>
-                                                    <FormFeedback>{errors.tipo_documento}</FormFeedback>
-                                                    </FormGroup>
-                                                    
-                                            </Col>
-                                            <Col md={6}>
-
-                                                <FormGroup>
-                                                    <Label id='subtitle' for="numero_documento" >Número de Documento:</Label>
-                                                    <Input id='text'
-                                                        type="text"
-                                                        name="numero_documento"
-                                                        // placeholder="Descripcion"
-                                                        invalid={errors.numero_documento && touched.numero_documento}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.numero_documento}
-                                                    />
-                                                    <FormFeedback>{errors.numero_documento}</FormFeedback>
-                                                </FormGroup>
-                                            </Col>
-                                        </Row>
-                                        <Row className='text-align-center justify-content-center'>
-                                            <Button type='submit' className='btn btn-primary mt-4' style={{ color: 'white', maxWidth: '35%' }} color="#D2691E" disabled={isSubmitting}>
-                                            {isSubmitting ? `ENVIANDO...` : `CONSULTAR →`}
-                                            </Button>
-                                            
-                                        </Row>
-                                    </Form>
-                                );
-                            }}
-                        </Formik>
-                    </Card>
-                </Container>
-            }
-        */ }
         </>
     )
 }

@@ -18,14 +18,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const RegisterProductAux = () => {
-  const URI = "https://comprarte-backend-production.up.railway.app/createProduct";
+  const URI = "http://localhost:8000/createProduct";
   const productData = useSelector((status) => status.productCreateSlice);
   const dispatch = useDispatch();
   const [listCategory, setlistCategory] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("https://comprarte-backend-production.up.railway.app/categoriesAll");
+      const response = await fetch("http://localhost:8000/categoriesAll");
       const data = await response.json();
       setlistCategory(data);
     }
@@ -149,13 +149,13 @@ const RegisterProductAux = () => {
               await axios
                 .post(URI, {
                   id_category: values.categoria,
-                  nombre_producto: values.nombre_Producto,
-                  descripcion: values.descripcion,
-                  cantidad: values.cantidad,
-                  referencia_producto: values.referencia,
-                  precio_unitario: values.precio_unitario,
-                  imagen_producto: productData.imagen,
-                  estado: values.estado_producto,
+                  name_product: values.nombre_Producto,
+                  description_product: values.descripcion,
+                  quantity: values.cantidad,
+                  product_reference: values.referencia,
+                  unit_price: values.precio_unitario,
+                  product_picture: productData.imagen,
+                  status_product: values.estado_producto,
                 })
                 .then(function (res) {
                   if (res.status === 200) {

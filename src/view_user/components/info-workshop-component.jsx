@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 export default function WorkshopInfoComponent({ fecha }) {
   const [listworkshop, setlistworkshop] = useState([]);
-  const URI = "https://comprarte-backend-production.up.railway.app/AllWorkshops";
+  const URI = "http://localhost:8000/AllWorkshops";
   const dispatch = useDispatch();
 
   const containerStyle = {

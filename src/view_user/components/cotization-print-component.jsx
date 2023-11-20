@@ -8,13 +8,13 @@ import { clear } from '../../features/cotizations/cotizationDataSlice';
 export default function CotizationPrintComponent({state, setState}) {
     const cotizationData = useSelector(state => state.cotizationData)
     const dispatch = useDispatch()
-    const URI = "https://comprarte-backend-production.up.railway.app/quotes/"
+    const URI = "http://localhost:8000/quotes/"
 
     const printCotization = async () => {
         await axios.post(URI+'print', cotizationData)
             .then(function (res) {
                 console.log(res)
-                handlePrint(res.data.base64.base64)
+                handlePrint(res.data.base64)
             })
 
     }
@@ -22,19 +22,18 @@ export default function CotizationPrintComponent({state, setState}) {
     const clearCotizationData = () =>{
         dispatch(clear({
             'client': {
-                'id_cliente': 0,
-                'nombres_cliente': '',
-                'apellidos_cliente': '',
-                'tipo_documento': '',
-                'numero_documento': '',
-                'telefono':'',
-                'email': ''
+                'id_customer': 0,
+                'name_customer': '',
+                'lastname_customer': '',
+                'document_type': '',
+                'number_document': '',
+                'number_phone':'',
+                'email_customer': ''
             },
             'products': [],
-            'date': '',
-            'description':'',
-            'subtotal': 0,
-            'total': 0
+            'date_quote': '',
+            'subtotal_quote': 0,
+            'total_quote': 0
         }))
     }
 
@@ -44,7 +43,7 @@ export default function CotizationPrintComponent({state, setState}) {
             if(res.status === 200){
                 swal({
                     title: "Cotización enviada al correo:",
-                    text: cotizationData.client.email,
+                    text: cotizationData.customer_data.email_customer,
                     icon: "success",
                     timer: 3000,
                 }).then(()=>{
